@@ -1,0 +1,30 @@
+{
+  "name": "backcontacts",
+  "version": "1.0.0",
+  "description": "backcontacts",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec npm run babel-node backcontacts.js",
+    "babel-node": "babel-node --presets=@babel/preset-env",
+    "build": "babel src --out-dir dist",
+    "start": "node dist/backcontacts.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.4",
+    "sequelize": "^6.31.0",
+    "sequelize-cli": "^6.6.0"
+  }
+}

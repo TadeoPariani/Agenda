@@ -1,0 +1,36 @@
+{
+  "name": "backcontacts",
+  "version": "1.0.0",
+  "description": "backcontacts",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec npm run babel-node src/backcontacts.js",
+    "babel-node": "babel-node --presets=@babel/preset-env",
+    "build": "babel src --out-dir dist",
+    "start": "nodemon --exec npm run babel-node comp/backcontacts.js",
+    "migration": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo",
+    "seed": "npx sequelize-cli db:seed:all",
+    "seed:undo": "npx sequelize-cli db:seed:undo"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "nodemon": "^2.0.22",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.4",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.21.4",
+    "sequelize": "^6.31.0",
+    "sequelize-cli": "^6.6.0"
+  }
+}
