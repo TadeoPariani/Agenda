@@ -81,10 +81,6 @@ const verificationId = async (req, res, next) => {
     }
 }
 
-
-
-
-
 module.exports = {
     getUsers,
     getUser,
