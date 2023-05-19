@@ -1,0 +1,31 @@
+### OBTENER TODOS LOS USUARIOS
+GET http://127.0.0.1:3001/user HTTP/1.1
+content-type: application/json
+
+### OBTENER UN USUARIO
+GET http://127.0.0.1:3001/user/18 HTTP/1.1
+content-type: application/json
+
+### AGREGAR UN USUARIO
+POST http://127.0.0.1:3001/user HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Admin",
+    "email": "Admin@gmail.com",
+    "password": "admin"
+}
+
+### EDITAR UN USUARIO
+PUT http://127.0.0.1:3001/user/1 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Tadeo",
+    "email": "tadeo@gmail.com",
+    "password": "12345"
+}
+
+### BORRAR UN USUARIO
+DELETE http://127.0.0.1:3001/user/1 HTTP/1.1
+content-type: application/json

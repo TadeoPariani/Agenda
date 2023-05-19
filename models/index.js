@@ -40,4 +40,8 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+<<<<<<< Updated upstream
 module.exports = db;
+=======
+module.exports = db;
+>>>>>>> Stashed changes

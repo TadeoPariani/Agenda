@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
     "development": {
       "username": "postgres",
       "password": "postgres",
@@ -8,19 +9,42 @@
       "dialect": "postgres"
     },
     "test": {
+=======
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "db_development",
+    "host": "localhost",
+    "port": 5434,
+    "dialect": "postgres"
+  },
+  "test": {
+>>>>>>> Stashed changes
     "username": "postgres",
     "password": "postgres",
     "database": "db_test",
     "host": "localhost",
     "port": 5434,
     "dialect": "postgres"
+<<<<<<< Updated upstream
     },
     "production": {
+=======
+  },
+  "production": {
+>>>>>>> Stashed changes
     "username": "postgres",
     "password": "postgres",
     "database": "db_production",
     "host": "localhost",
     "port": 5434,
     "dialect": "postgres"
+<<<<<<< Updated upstream
     }
   }
+=======
+  }
+}
+
+
+>>>>>>> Stashed changes
