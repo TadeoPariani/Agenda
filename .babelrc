@@ -2,8 +2,4 @@
     "presets": [
         "@babel/preset-env"
     ]
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

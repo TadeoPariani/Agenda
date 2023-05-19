@@ -1,8 +1,25 @@
 const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
+const Joi = require('joi')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 import { hashPass } from "../auth/auth";
+
+
+const userSchema = Joi.object({
+    name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()
+          .messages({
+              'string.pattern.base': 'The name cannot contain numbers or special characters'
+          }),
+    email: Joi.string().min(3).email().required()
+          .messages({
+              'string.pattern.base': 'The phone number can only be made up of numbers'
+          }),
+    password: Joi.string().min(3).max(30).required()
+    .messages({
+        'string.pattern.base': ''
+    })
+});
 
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})
@@ -17,37 +34,55 @@ const getUser = async (req, res, next) => {
 
 const addUser = async (req, res, next) => {
     let body = req.body
-    // let prueba = hashPass(body.password)
-    // res.json({data: prueba})
-    bcrypt.hash(body.password, saltRounds, async function(err, hash) {
-        if (err){
-            res.status(400).json({message: "f"})
+    try {
+        const validatedData = await userSchema.validateAsync(body);
+        // const newContact = await User.create(validatedData);
+        res.status(201).json({
+          message: 'New contact has been created successfully',
+          data: validatedData,
+        });
+      } catch (err) {
+        if (err.details) {
+          res.status(400).json({ error: err.details[0].message });
         } else {
-            body.password = hash
-            let newUser = await User.create(body) 
-            res.status(200).json({data: newUser})
+          console.error(err);
+          res.status(500).json({ error: 'Internal server error' });
         }
-    })
-}
+    }
+};
 
 const editUser = async (req, res, next) => {
     let id = req.params.id
-    body = req.body
-    const existingUser = await User.findByPk(id);
-    existingUser.name = body.name
-    existingUser.email = body.email
-    existingUser.password = body.password
-    await bcrypt.hash(existingUser.password, saltRounds, async function(err, hash) {
-        if (err){
-            res.status(400).json({message: "f"})
-        } else {
-            existingUser.password = hash
-            await existingUser.save()
-            res.status(200).json({data: existingUser})
-        }
-    })
-}  
+    let body = req.body
 
+    try {
+        const validatedData = await userSchema.validateAsync(body);
+        res.status(201).json({
+            message: 'New contact has been created successfully',
+            data: validatedData,
+        });
+        // const existingUser = await User.findByPk(id);
+        // existingUser.name = body.name
+        // existingUser.email = body.email
+        // existingUser.password = body.password
+        // await bcrypt.hash(existingUser.password, saltRounds, async function(err, hash) {
+        //     if (err){
+        //         res.status(400).json({message: "f"})
+        //     } else {
+        //         existingUser.password = hash
+        //         await existingUser.save()
+        //         res.status(200).json({data: existingUser})
+        //     }
+        // })
+    } catch (err) {
+        if (err.details) {
+          res.status(400).json({ error: err.details[0].message });
+        } else {
+          console.error(err);
+          res.status(500).json({ error: 'Internal server error' });
+        }
+    }
+}  
 
 const deleteUser = async (req, res, next) => {
     let id = req.params.id
@@ -61,15 +96,17 @@ const deleteUser = async (req, res, next) => {
     res.status(200).json({Message: 'User deleted', data: UsersDb})
 }
 
-
 // Se verifica que el id del usuario a buscar/borrar/editar exista
 const verificationId = async (req, res, next) => {
     let id = req.params.id
-    const existingUser = await User.findByPk(id);
-    if (existingUser){
-        next()
-    }else{
-        return res.status(400).json({ message: 'User doesnt exists'});
+    try{
+        const existingUser = await User.findByPk(id);
+        if (existingUser){
+            next()
+        }
+    }
+    catch (err) {
+        res.status(200).json({ error: 'user doesnt exists' });
     }
 }
 

@@ -11,9 +11,9 @@ POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Admin",
-    "email": "Admin@gmail.com",
-    "password": "admin"
+    "name": "Anas",
+    "email": "admin@gmail.com",
+    "password": "adeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
 }
 
 ### EDITAR UN USUARIO
@@ -21,9 +21,9 @@ PUT http://127.0.0.1:3001/user/1 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Tadeo",
+    "name": "Tade",
     "email": "tadeo@gmail.com",
-    "password": "12345"
+    "password": "wdww"
 }
 
 ### BORRAR UN USUARIO

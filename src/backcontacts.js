@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const contactosRouter = require('./routes/contactosRouters');
+// const contactosRouter = require('./routes/contactosRouters');
 const userRouters = require ('./routes/userRouters')
 app.use(express.json())
 
@@ -18,8 +18,8 @@ const sequelize = new Sequelize('postgresql://postgres:postgres@localhost:5434/p
 
 sequelize.authenticate()
 
-app.use('/contactos', contactosRouter);
-app.use('/contactos/:id', contactosRouter);
+// app.use('/contactos', contactosRouter);
+// app.use('/contactos/:id', contactosRouter);
 app.use('/user', userRouters)
 
 const PORT = 3001
