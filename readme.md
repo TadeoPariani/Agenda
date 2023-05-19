@@ -39,6 +39,9 @@ npm install --save-dev cross-env
 npm install dotenv
 npm install cors
 npm install joi
+npm install jsonwebtoken
+npm install bcrypy
+
 ```
 3. Crear el archivo `.babelrc`en la raíz del proyecto con el siguiente contenido:
 
