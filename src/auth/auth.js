@@ -3,12 +3,8 @@ const bcrypt = require('bcrypt');
 
 // export const hashPass = async function(password){
 //   const saltRounds = 10;
-
 //   let dd = await bcrypt.hash(password, saltRounds)
-
 //   return dd
-
-  
 // }
 
 

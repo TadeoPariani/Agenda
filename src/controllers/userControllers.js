@@ -17,25 +17,17 @@ const getUser = async (req, res, next) => {
 
 const addUser = async (req, res, next) => {
     let body = req.body
-    let prueba = hashPass(body.password)
-    res.json({data: prueba})
-
-
-
-    // bcrypt.hash(body.password, saltRounds, async function(err, hash) {
-    //     if (err){
-    //         res.status(400).json({message: "f"})
-    //     } else {
-    //         body.password = hash
-    //         let newUser = await User.create(body) 
-    //         res.status(200).json({data: newUser})
-    //     }
-    // })
-
-
-
-
-
+    // let prueba = hashPass(body.password)
+    // res.json({data: prueba})
+    bcrypt.hash(body.password, saltRounds, async function(err, hash) {
+        if (err){
+            res.status(400).json({message: "f"})
+        } else {
+            body.password = hash
+            let newUser = await User.create(body) 
+            res.status(200).json({data: newUser})
+        }
+    })
 }
 
 const editUser = async (req, res, next) => {
