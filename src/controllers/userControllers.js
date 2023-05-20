@@ -4,21 +4,7 @@ const Joi = require('joi')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const { hashPass } = require('../auth/auth');
-
-const userSchema = Joi.object({
-    name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()
-          .messages({
-              'string.pattern.base': 'The name cannot contain numbers or special characters'
-          }),
-    email: Joi.string().min(3).email().required()
-          .messages({
-              'string.pattern.base': 'The phone number can only be made up of numbers'
-          }),
-    password: Joi.string().min(3).max(30).required()
-    .messages({
-        'string.pattern.base': ''
-    })
-});
+const { userSchema } = require('../auth/auth')
 
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})
@@ -38,10 +24,10 @@ const addUser = async (req, res, next) => {
         const hashedPassword = await hashPass(body.password);
         if (hashedPassword) {
             validatedData.password = hashedPassword
-            const newContact = await User.create(validatedData)
+            await User.create(validatedData)
             res.status(201).json({message: 'New user has been created successfully', data: validatedData});
         }
-    } catch (err) {
+    }catch (err) {
         if (err.details) {
             res.status(400).json({ error: err.details[0].message });
         } else {
