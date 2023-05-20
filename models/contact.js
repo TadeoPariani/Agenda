@@ -8,10 +8,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Contact.init({
-    name: DataTypes.STRING,
-    phone: DataTypes.STRING,
-    date: DataTypes.STRING,
-    favourite: DataTypes.STRING,
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    phone: {
+          type: DataTypes.STRING,
+        allowNull: false
+    },
+    date: {
+        type: DataTypes.STRING,
+        defaultValue: new Date().toLocaleDateString('es-ES')
+      },
+    favourite: {
+        type: DataTypes.BOOLEAN,
+        defaultValue:false
+    }
   }, {
     sequelize,
     modelName: 'Contact',

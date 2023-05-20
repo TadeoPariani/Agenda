@@ -3,8 +3,7 @@ const express = require('express');
 const Joi = require('joi')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-import { hashPass } from "../auth/auth";
-
+const { hashPass } = require('../auth/auth');
 
 const userSchema = Joi.object({
     name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()
@@ -33,53 +32,47 @@ const getUser = async (req, res, next) => {
 }
 
 const addUser = async (req, res, next) => {
-    let body = req.body
+    let body = req.body;
     try {
-        const validatedData = await userSchema.validateAsync(body);
-        // const newContact = await User.create(validatedData);
-        res.status(201).json({
-          message: 'New contact has been created successfully',
-          data: validatedData,
-        });
-      } catch (err) {
+        const validatedData = await userSchema.validateAsync(body)
+        const hashedPassword = await hashPass(body.password);
+        if (hashedPassword) {
+            validatedData.password = hashedPassword
+            const newContact = await User.create(validatedData)
+            res.status(201).json({message: 'New user has been created successfully', data: validatedData});
+        }
+    } catch (err) {
         if (err.details) {
-          res.status(400).json({ error: err.details[0].message });
+            res.status(400).json({ error: err.details[0].message });
         } else {
-          console.error(err);
-          res.status(500).json({ error: 'Internal server error' });
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
         }
     }
 };
 
+
 const editUser = async (req, res, next) => {
     let id = req.params.id
     let body = req.body
-
     try {
-        const validatedData = await userSchema.validateAsync(body);
-        res.status(201).json({
-            message: 'New contact has been created successfully',
-            data: validatedData,
-        });
-        // const existingUser = await User.findByPk(id);
-        // existingUser.name = body.name
-        // existingUser.email = body.email
-        // existingUser.password = body.password
-        // await bcrypt.hash(existingUser.password, saltRounds, async function(err, hash) {
-        //     if (err){
-        //         res.status(400).json({message: "f"})
-        //     } else {
-        //         existingUser.password = hash
-        //         await existingUser.save()
-        //         res.status(200).json({data: existingUser})
-        //     }
-        // })
+        const validatedData = await userSchema.validateAsync(body)
+        const hashedPassword = await hashPass(body.password);
+        if (hashedPassword) {
+            validatedData.password = hashedPassword
+            const existingUser = await User.findByPk(id);
+            existingUser.name = validatedData.name
+            existingUser.email = validatedData.email
+            existingUser.password = validatedData.password
+            await existingUser.save()
+            res.status(201).json({message: 'The user has been edited successfully', data: validatedData, user: existingUser });
+        }
     } catch (err) {
         if (err.details) {
-          res.status(400).json({ error: err.details[0].message });
+            res.status(400).json({ error: err.details[0].message });
         } else {
-          console.error(err);
-          res.status(500).json({ error: 'Internal server error' });
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
         }
     }
 }  
