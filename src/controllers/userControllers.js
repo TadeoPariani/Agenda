@@ -1,8 +1,5 @@
 const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
-const Joi = require('joi')
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const { hashPass } = require('../auth/auth');
 const { userSchema } = require('../auth/auth')
 
