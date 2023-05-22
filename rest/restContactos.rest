@@ -1,0 +1,38 @@
+### OBTENER UN CONTACTO
+GET http://127.0.0.1:3001/contactos/1 HTTP/1.1
+content-type: application/json
+
+### OBTENER TODOS LOS CONTACTOS
+GET http://127.0.0.1:3001/contactos HTTP/1.1
+content-type: application/json
+
+### AGREGAR UN CONTACTO
+POST http://127.0.0.1:3001/contactos HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Francisco",
+    "phone":"358949123",
+    "date":"2013-09-12",
+    "favourite":"true",
+    "adminPassword":"admin"
+    
+}
+
+### BORRAR UN CONTACTO
+DELETE http://127.0.0.1:3001/contactos/8 HTTP/1.1
+content-type: application/json
+
+### EDITAR UN CONTACTO
+PUT http://127.0.0.1:3001/contactos/1 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Alejandro Perez",
+    "phone":"356789089",
+    "date":"2015-12-23",
+    "favourite":"true"
+}
+
+
+
