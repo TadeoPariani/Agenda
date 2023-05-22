@@ -58,11 +58,15 @@ npm install bcrypy
 
 ```json
  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec npm run babel-node src/routes/contactRoutes.js",
+    "dev": "nodemon --exec npm run babel-node src/backcontacts.js",
     "babel-node": "babel-node --presets=@babel/preset-env",
     "build": "babel src --out-dir dist",
-    "start": "node dist/index.js"
+    "start": "nodemon --exec npm run babel-node comp/backcontacts.js",
+    "migration": "npx sequelize-cli db:migrate",
+    "migration:undo": "npx sequelize-cli db:migrate:undo",
+    "seed": "npx sequelize-cli db:seed:all",
+    "seed:undo": "npx sequelize-cli db:seed:undo",
+    "test": "echo \"Error: no test specified\" && exit 1"
   }
 ```
 # Generar migración con Sequelize
