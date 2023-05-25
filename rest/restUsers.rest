@@ -9,11 +9,12 @@ content-type: application/json
 ### AGREGAR UN USUARIO
 POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
+adminPassword: admin
 
 {
-    "name": "pedro",
+    "name": "anas",
     "email": "admin@gmail.com",
-    "password": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    "password": "admin"
 }
 
 ### EDITAR UN USUARIO
@@ -27,5 +28,5 @@ content-type: application/json
 }
 
 ### BORRAR UN USUARIO
-DELETE http://127.0.0.1:3001/user/2 HTTP/1.1
+DELETE http://127.0.0.1:3001/user/1 HTTP/1.1
 content-type: application/json

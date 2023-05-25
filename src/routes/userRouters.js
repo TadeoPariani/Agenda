@@ -7,16 +7,22 @@ const {
    getUser,
    editUser,
    deleteUser,
-   addUser,
-   verificationId
+   addUser
 
 } = require('../controllers/userControllers')
+
+const { 
+
+   login,
+   verificationId
+
+} = require('../middleware/middle')
 
 router.get('/', getUsers)
 
 router.get('/:id', verificationId, getUser)
 
-router.post('/', addUser)
+router.post('/', login, addUser)
 
 router.put('/:id', verificationId, editUser)
 

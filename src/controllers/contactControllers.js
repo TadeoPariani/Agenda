@@ -51,7 +51,6 @@ const getContactbyID = async (req, res,next) => {
 const addContact = async (req, res, next) => {
   try {
     const validatedData = await contactSchema.validateAsync(req.body);
-    
     const newContact = await Contact.create(validatedData);
     res.status(201).json({
       message: 'New contact has been created successfully',

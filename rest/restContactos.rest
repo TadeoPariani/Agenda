@@ -13,10 +13,7 @@ content-type: application/json
 {
     "name": "Francisco",
     "phone":"358949123",
-    "date":"2013-09-12",
-    "favourite":"true",
-    "adminPassword":"admin"
-    
+    "favourite":"true"
 }
 
 ### BORRAR UN CONTACTO
@@ -30,7 +27,6 @@ content-type: application/json
 {
     "name": "Alejandro Perez",
     "phone":"356789089",
-    "date":"2015-12-23",
     "favourite":"true"
 }
 

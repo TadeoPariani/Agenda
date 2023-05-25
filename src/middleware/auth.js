@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 const Joi = require('joi')
+const express = require('express');
+const { sequelize, Sequelize, User} = require ('../../models')
 
-export async function hashPass(body, res) {
+export async function hashPass(body) {
   const saltRounds = 10;
   try {
     const hash = await bcrypt.hash(body, saltRounds);
@@ -26,6 +28,11 @@ export const userSchema = Joi.object({
       'string.pattern.base': ''
   })
 });
+
+
+
+// login
+
 
 
 
