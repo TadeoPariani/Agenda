@@ -1,9 +1,7 @@
 const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
-const { hashPass } = require('../middleware/auth');
-const { userSchema } = require('../middleware/auth')
-
-
+const { hashPass } = require('../auth/auth');
+const { userSchema } = require('../auth/auth')
 
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})

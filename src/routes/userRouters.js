@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { login } = require('../auth/auth');
+const { verificationId } = require('../auth/auth')
 
 const {
 
@@ -10,13 +12,6 @@ const {
    addUser
 
 } = require('../controllers/userControllers')
-
-const { 
-
-   login,
-   verificationId
-
-} = require('../middleware/middle')
 
 router.get('/', getUsers)
 

@@ -3,16 +3,16 @@ GET http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 ### OBTENER UN USUARIO
-GET http://127.0.0.1:3001/user/18 HTTP/1.1
+GET http://127.0.0.1:3001/user/2 HTTP/1.1
 content-type: application/json
 
 ### AGREGAR UN USUARIO
 POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
-adminPassword: admin
+adminPassword: a
 
 {
-    "name": "anas",
+    "name": "asdwfw",
     "email": "admin@gmail.com",
     "password": "admin"
 }

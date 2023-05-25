@@ -1,3 +1,4 @@
+import { json } from 'sequelize';
 const bcrypt = require('bcrypt');
 const Joi = require('joi')
 const express = require('express');
@@ -29,17 +30,30 @@ export const userSchema = Joi.object({
   })
 });
 
+export const login = async (req, res, next) => {
+  let headers = req.headers
+  const admin = await User.findByPk(3);
+  bcrypt.compare(headers.adminpassword, admin.password, async function(err, result){
+      if (result == true) {
+          next()
+      } else {
+          res.status(400).json({Status: "Wrong password, try again"})
+      }
+  })
+}
 
-
-// login
-
-
-
-
-
-
-
-
-
-
-
+export const verificationId = async (req, res, next) => {
+  let id = req.params.id
+  try{
+      const existingUser = await User.findByPk(id);
+      res,json({dd: existingUser})
+      if (existingUser){
+          next()
+      }else{
+        res.status(200).json({ error: 'User doesnt exists' });
+      }
+  }
+  catch (err) {
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
