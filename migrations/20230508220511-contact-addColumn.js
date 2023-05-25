@@ -19,11 +19,6 @@ module.exports = {
         allowNull: false,
         unique: false
       },
-      date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        unique: false
-      },
       favourite: {
         type: Sequelize.BOOLEAN,
         allowNull: false
