@@ -62,6 +62,7 @@ npm install bcrypy
     "babel-node": "babel-node --presets=@babel/preset-env",
     "build": "babel src --out-dir dist",
     "start": "nodemon --exec npm run babel-node comp/backcontacts.js",
+    "db_create": "npx sequelize-cli db:create",
     "migration": "npx sequelize-cli db:migrate",
     "migration:undo": "npx sequelize-cli db:migrate:undo",
     "seed": "npx sequelize-cli db:seed:all",
