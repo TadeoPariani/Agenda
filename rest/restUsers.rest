@@ -14,7 +14,7 @@ adminPassword: a
 {
     "name": "asdwfw",
     "email": "admin@gmail.com",
-    "password": "admin"
+    "password": "aaaaa5asd442aaaaa"
 }
 
 ### EDITAR UN USUARIO

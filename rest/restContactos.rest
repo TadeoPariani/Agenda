@@ -1,34 +1,38 @@
-### OBTENER UN CONTACTO
-GET http://127.0.0.1:3001/contactos/1 HTTP/1.1
+## Get all contacts
+GET http://127.0.0.1:3001/contact/ HTTP/1.1 c
+ontent-type: application/json
+
+## Get favourites contacts
+GET http://localhost:3001/contact/favourites HTTP/1.1 
 content-type: application/json
 
-### OBTENER TODOS LOS CONTACTOS
-GET http://127.0.0.1:3001/contactos HTTP/1.1
+## Get contact by id
+GET http://localhost:3001/contact/1 HTTP/1.1 
 content-type: application/json
 
-### AGREGAR UN CONTACTO
-POST http://127.0.0.1:3001/contactos HTTP/1.1
+## Search contact by name from the body
+GET http://localhost:3001/contact/search HTTP/1.1 
+content-type: application/json
+{
+"name":"Alfredo"
+}
+
+## Create contact
+POST http://localhost:3001/contact/ HTTP/1.1 
 content-type: application/json
 
 {
-    "name": "Francisco",
-    "phone":"358949123",
-    "favourite":"true"
+"name":"Alfredo", "phone":"08102224458"
 }
 
-### BORRAR UN CONTACTO
-DELETE http://127.0.0.1:3001/contactos/8 HTTP/1.1
-content-type: application/json
-
-### EDITAR UN CONTACTO
-PUT http://127.0.0.1:3001/contactos/1 HTTP/1.1
+## Update contact
+PUT http://localhost:3001/contact/1 HTTP/1.1 
 content-type: application/json
 
 {
-    "name": "Alejandro Perez",
-    "phone":"356789089",
-    "favourite":"true"
+"name":"Alfero", "phone":"0855599924458"
 }
 
-
-
+## Delete contact
+DELETE http://localhost:3003/contact/1 HTTP/1.1 
+content-type: application/json
