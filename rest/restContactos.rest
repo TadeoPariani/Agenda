@@ -1,6 +1,6 @@
 ## Get all contacts
-GET http://127.0.0.1:3001/contact/ HTTP/1.1 c
-ontent-type: application/json
+GET http://127.0.0.1:3001/contact/ HTTP/1.1 
+content-type: application/json
 
 ## Get favourites contacts
 GET http://localhost:3001/contact/favourites HTTP/1.1 
