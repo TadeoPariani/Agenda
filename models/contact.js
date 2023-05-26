@@ -20,7 +20,6 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
         allowNull: false
     },
-    
     favourite: {
         type: DataTypes.BOOLEAN,
         defaultValue:false

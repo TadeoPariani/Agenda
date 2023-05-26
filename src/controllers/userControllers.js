@@ -1,8 +1,5 @@
 const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
-const Joi = require('joi')
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const { hashPass } = require('../auth/auth');
 const { userSchema } = require('../auth/auth')
 
@@ -24,19 +21,19 @@ const addUser = async (req, res, next) => {
         const hashedPassword = await hashPass(body.password);
         if (hashedPassword) {
             validatedData.password = hashedPassword
-            await User.create(validatedData)
+            // await User.create(validatedData)
             res.status(201).json({message: 'New user has been created successfully', data: validatedData});
         }
     }catch (err) {
         if (err.details) {
             res.status(400).json({ error: err.details[0].message });
-        } else {
+        }
+         else {
             console.error(err);
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', body: body });
         }
     }
 };
-
 
 const editUser = async (req, res, next) => {
     let id = req.params.id
@@ -58,7 +55,7 @@ const editUser = async (req, res, next) => {
             res.status(400).json({ error: err.details[0].message });
         } else {
             console.error(err);
-            res.status(500).json({ error: 'Internal server error' });
+            res.status(500).json({ error: 'Internal server error', });
         }
     }
 }  
@@ -66,27 +63,13 @@ const editUser = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
     let id = req.params.id
     const existingUser = await User.findByPk(id);
-    await existingUser.destroy({
-        where: {
-          id: id
-        }
-    });
+    // await existingUser.destroy({
+    //     where: {
+    //       id: id
+    //     }
+    // });
     const UsersDb  = await User.findAll({})
     res.status(200).json({Message: 'User deleted', data: UsersDb})
-}
-
-// Se verifica que el id del usuario a buscar/borrar/editar exista
-const verificationId = async (req, res, next) => {
-    let id = req.params.id
-    try{
-        const existingUser = await User.findByPk(id);
-        if (existingUser){
-            next()
-        }
-    }
-    catch (err) {
-        res.status(200).json({ error: 'user doesnt exists' });
-    }
 }
 
 module.exports = {
@@ -94,6 +77,5 @@ module.exports = {
     getUser,
     editUser,
     deleteUser,
-    addUser,
-    verificationId
+    addUser
 }

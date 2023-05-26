@@ -2,30 +2,32 @@
 GET http://127.0.0.1:3001/contact/ HTTP/1.1 
 content-type: application/json
 
-## Get favourites contacts
+### Get favourites contacts
 GET http://localhost:3001/contact/favourites HTTP/1.1 
 content-type: application/json
 
-## Get contact by id
+###
 GET http://localhost:3001/contact/1 HTTP/1.1 
 content-type: application/json
 
-## Search contact by name from the body
+### Search contact by name from the body
 GET http://localhost:3001/contact/search HTTP/1.1 
 content-type: application/json
 {
 "name":"Alfredo"
 }
 
-## Create contact
+### Create contact
 POST http://localhost:3001/contact/ HTTP/1.1 
 content-type: application/json
 
 {
-"name":"Alfredo", "phone":"08102224458"
+    "name":"Alfredo",
+    "lastname": "Juan",
+    "phone":"08102224458"
 }
 
-## Update contact
+### Update contact
 PUT http://localhost:3001/contact/1 HTTP/1.1 
 content-type: application/json
 
@@ -33,6 +35,6 @@ content-type: application/json
 "name":"Alfero", "phone":"0855599924458"
 }
 
-## Delete contact
+### Delete contact
 DELETE http://localhost:3003/contact/1 HTTP/1.1 
 content-type: application/json
