@@ -8,6 +8,10 @@ const contactSchema = Joi.object({
         .messages({
             'string.pattern.base': 'The name cannot contain numbers or special characters'
         }),
+  lastname: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
+        .messages({
+            'string.pattern.base': 'The lastname cannot contain numbers or special characters'
+        }),
   phone: Joi.string().pattern(new RegExp('^[0-9]+$')).required()
         .messages({
             'string.pattern.base': 'The phone number can only be made up of numbers'
@@ -17,18 +21,24 @@ const contactSchema = Joi.object({
 
 // View all contacts
 const getContacts = async (req, res, next) => {
-  try{
-    const viewAllContacts  = await Contact.findAll({})
-    res.json(
-      {
-        message:"Here are all your available Contacts", 
-        data:viewAllContacts
+  try {
+    const viewAllContacts = await Contact.findAll({});
+    if (viewAllContacts.length === 0) {
+      res.json({
+        message: "Your contact book is empty",
       });
-    }catch{
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
+    } else {
+      res.json({
+        message: "Here are all your available Contacts",
+        data: viewAllContacts,
+      });
     }
-}
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
 
 // View a single contact by id
 const getContactbyID = async (req, res,next) => {
@@ -52,6 +62,16 @@ const addContact = async (req, res, next) => {
   try {
     const validatedData = await contactSchema.validateAsync(req.body);
     
+    // Verificar si ya existe un contacto con el mismo número de teléfono
+    const existingContact = await Contact.findOne({
+      where: {
+        phone: validatedData.phone
+      }
+    });
+    if (existingContact) {
+      return res.status(409).json({ error: 'Phone number already exists' });
+    }
+
     const newContact = await Contact.create(validatedData);
     res.status(201).json({
       message: 'New contact has been created successfully',
@@ -66,6 +86,7 @@ const addContact = async (req, res, next) => {
     }
   }
 };
+
 
 // Delete contact by ID
 const deleteContact = async (req, res, next) => {

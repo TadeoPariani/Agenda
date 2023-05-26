@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec npm run babel-node src/backcontacts.js",
+    "dev": "nodemon --exec npm run babel-node app.js",
     "babel-node": "babel-node --presets=@babel/preset-env",
     "build": "babel src --out-dir dist",
     "start": "nodemon --exec npm run babel-node comp/backcontacts.js",

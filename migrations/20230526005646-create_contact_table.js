@@ -1,32 +1,29 @@
-'use strict';
-/** @type {import('sequelize-cli').Migration} */
+const { QueryInterface,DataTypes } = require('sequelize');
+const { Contact } = require('../models'); // Importar el modelo Contact
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Contacts', {
       id: {
-        allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
+      },
+      lastname: {
+        type: DataTypes.STRING,
+        allowNull: false
       },
       phone: {
         type: Sequelize.STRING,
-        allowNull: false,
-        unique: false
-      },
-      date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-        unique: false
+        allowNull: false
       },
       favourite: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
+        defaultValue:false
       },
       createdAt: {
         allowNull: false,
@@ -36,10 +33,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    })
-    
+    });
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Contacts');
   }
 };

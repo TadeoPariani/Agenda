@@ -12,14 +12,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false
     },
+    lastname: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     phone: {
           type: DataTypes.STRING,
         allowNull: false
     },
-    date: {
-        type: DataTypes.STRING,
-        defaultValue: new Date().toLocaleDateString('es-ES')
-      },
+    
     favourite: {
         type: DataTypes.BOOLEAN,
         defaultValue:false
