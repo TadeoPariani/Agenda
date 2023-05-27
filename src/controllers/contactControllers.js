@@ -2,22 +2,9 @@ const { sequelize, Sequelize, Contact} = require ('../../models')
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi')
+const { contactSchema } = require('../auth/auth')
 
-const contactSchema = Joi.object({
-  name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
-        .messages({
-            'string.pattern.base': 'The name cannot contain numbers or special characters'
-        }),
-  lastname: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
-        .messages({
-            'string.pattern.base': 'The lastname cannot contain numbers or special characters'
-        }),
-  phone: Joi.string().pattern(new RegExp('^[0-9]+$')).required()
-        .messages({
-            'string.pattern.base': 'The phone number can only be made up of numbers'
-        }),
-  favourite: Joi.boolean().optional(),
-});
+
 
 // View all contacts
 const getContacts = async (req, res, next) => {

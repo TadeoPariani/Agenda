@@ -14,6 +14,22 @@ export async function hashPass(body) {
     return null;
   }
 }
+export const contactSchema = Joi.object({
+  name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
+        .messages({
+            'string.pattern.base': 'The name cannot contain numbers or special characters'
+        }),
+  lastname: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
+        .messages({
+            'string.pattern.base': 'The lastname cannot contain numbers or special characters'
+        }),
+  phone: Joi.string().pattern(new RegExp('^[0-9]+$')).required()
+        .messages({
+            'string.pattern.base': 'The phone number can only be made up of numbers'
+        }),
+  favourite: Joi.boolean().optional(),
+});
+
 
 export const userSchema = Joi.object({
   name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()

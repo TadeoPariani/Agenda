@@ -1,6 +1,7 @@
 const { sequelize, Contact } = require('../../models');
 const { addContact } = require('../../src/controllers/contactControllers');
 
+//Limpiar la base de datos antes de ejecutar el testeo
 beforeEach(async () => {
   await Contact.destroy({ truncate: true });
 });
