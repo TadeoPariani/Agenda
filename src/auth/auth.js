@@ -14,6 +14,7 @@ export async function hashPass(body) {
     return null;
   }
 }
+
 export const contactSchema = Joi.object({
   name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
         .messages({
@@ -55,18 +56,18 @@ export const login = async (req, res, next) => {
       } else {
           res.status(400).json({Status: "Wrong password, try again"})
       }
-  })
+    }
+  )
 }
 
 export const verificationId = async (req, res, next) => {
   let id = req.params.id
   try{
       const existingUser = await User.findByPk(id);
-      res,json({dd: existingUser})
       if (existingUser){
           next()
       }else{
-        res.status(200).json({ error: 'User doesnt exists' });
+        res.status(400).json({ error: 'User doesnt exists' });
       }
   }
   catch (err) {

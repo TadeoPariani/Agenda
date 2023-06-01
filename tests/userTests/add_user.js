@@ -1,5 +1,10 @@
 const { sequelize, User } = require('../../models');
 const { addUser } = require('../../src/controllers/userControllers');
+const bcrypt = require('bcrypt');
+const nombre = "pedro"
+const email = "pedro@gmail.com"
+const contras = "pedro123"
+
 
 //Limpiar la base de datos antes de ejecutar el testeo
 // beforeEach(async () => {
@@ -7,12 +12,12 @@ const { addUser } = require('../../src/controllers/userControllers');
 // });
 
 describe('addUser', () => {
-  it('should create a new User', async () => {
+  it('New user has been created successfully', async () => {
     const req = {
       body: {
-        name: 'juan',
-        email: 'juan@gmail.com',
-        password: 'juan123'
+        name: nombre,
+        email: email,
+        password: contras
       },
     };
 
@@ -29,23 +34,23 @@ describe('addUser', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'New user has been created successfully',
       data: expect.objectContaining({
-        name: 'juan',
-        email: 'juan@gmail.com',
-        password: req.body.password
+        name: nombre, 
+        email: email,
+        password: expect.anything()
       }),
     });
 
     expect(next).not.toHaveBeenCalled();
      // Verificar que el usuario se haya guardado en la base de datos
      const createdUser = await User.findOne({
-      where: { email: 'juan@gmail.com' },
+      where: { email: email },
     });
-   
-    expect(createdUser).toBeTruthy();
-    expect(createdUser.name).toBe('juan');
-    expect(createdUser.gmail).toBe('juan@gmail.com');
-    //
-  });
 
-  // Otros casos de prueba aquí...
+    const hashedPassword = await bcrypt.compare(contras, createdUser.password);
+
+    expect(createdUser).toBeTruthy();
+    expect(createdUser.name).toBe(nombre);
+    expect(createdUser.email).toBe(email);
+    expect(hashedPassword).toBe(true)
+  });
 });

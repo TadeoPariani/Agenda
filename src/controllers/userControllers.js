@@ -5,13 +5,17 @@ const { userSchema } = require('../auth/auth')
 
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})
-    res.json({message:"All your users", data: allUsers});
+    res.status(200).json({message:"All your users", data: allUsers});
 }
 
 const getUser = async (req, res, next) => {
     let id = req.params.id
     const existingUser = await User.findByPk(id);
-    res.status(200).json({Message: `Contact: ${existingUser.name}`, data: existingUser})
+    if (existingUser){
+        res.status(200).json({ message: `User: `, data: existingUser })
+    }else{
+        res.status(400).json({ error: 'bad request' })
+    }
 }
 
 const addUser = async (req, res, next) => {
@@ -21,7 +25,7 @@ const addUser = async (req, res, next) => {
         const hashedPassword = await hashPass(body.password);
         if (hashedPassword) {
             validatedData.password = hashedPassword
-            await User.create(validatedData)
+            // await User.create(validatedData)
             res.status(201).json({message: 'New user has been created successfully', data: validatedData});
         }
     }catch (err) {
@@ -63,13 +67,17 @@ const editUser = async (req, res, next) => {
 const deleteUser = async (req, res, next) => {
     let id = req.params.id
     const existingUser = await User.findByPk(id);
-    // await existingUser.destroy({
-    //     where: {
-    //       id: id
-    //     }
-    // });
-    const UsersDb  = await User.findAll({})
-    res.status(200).json({Message: 'User deleted', data: UsersDb})
+    if (existingUser){
+        await existingUser.destroy({
+            where: {
+              id: id
+            }
+        });
+        const UsersDb  = await User.findAll({})
+        res.status(200).json({ message: 'User deleted', data: UsersDb })
+    }else{
+        res.status(400).json({ error: "bad request" })
+    }
 }
 
 module.exports = {
