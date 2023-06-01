@@ -12,19 +12,19 @@ content-type: application/json
 adminpassword: admin
 
 {
-    "name": "Marcelo",
-    "email": "Marcelo@gmail.com",
-    "password": "Marcelo123"
+    "name": "Tadeo",
+    "email": "Tadeo@gmail.com",
+    "password": "tadeo"
 }
 
 ### EDITAR UN USUARIO
-PUT http://127.0.0.1:3001/user/2 HTTP/1.1
+PUT http://127.0.0.1:3001/user/1 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Javier",
-    "email": "Javier@gmail.com",
-    "password": "2989898"
+    "name": "Tadeo",
+    "email": "Tadeo@gmail.com",
+    "password": "tadeo"
 }
 
 ### BORRAR UN USUARIO

@@ -15,6 +15,7 @@ export async function hashPass(body) {
   }
 }
 
+
 export const contactSchema = Joi.object({
   name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
         .messages({
@@ -30,7 +31,6 @@ export const contactSchema = Joi.object({
         }),
   favourite: Joi.boolean().optional(),
 });
-
 
 export const userSchema = Joi.object({
   name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()

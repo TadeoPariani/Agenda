@@ -3,6 +3,7 @@ const express = require('express');
 const { hashPass } = require('../auth/auth');
 const { userSchema } = require('../auth/auth')
 
+
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})
     res.status(200).json({message:"All your users", data: allUsers});
@@ -22,6 +23,15 @@ const addUser = async (req, res, next) => {
     let body = req.body;
     try {
         const validatedData = await userSchema.validateAsync(body)
+        const existingUserEmail = await User.findOne({
+            where:{
+              email: validatedData.email
+            }
+        })
+        if (existingUserEmail){
+            return res.status(409).json({ error: 'Email already exists' });
+        }
+
         const hashedPassword = await hashPass(body.password);
         if (hashedPassword) {
             validatedData.password = hashedPassword
@@ -52,7 +62,7 @@ const editUser = async (req, res, next) => {
             existingUser.email = validatedData.email
             existingUser.password = validatedData.password
             await existingUser.save()
-            res.status(201).json({message: 'The user has been edited successfully', data: validatedData, user: existingUser });
+            res.status(201).json({message: 'The user has been edited successfully', data: validatedData});
         }
     } catch (err) {
         if (err.details) {

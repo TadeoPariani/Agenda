@@ -7,7 +7,6 @@ const nombre = "alejandro"
 const email = "alejandro@gmail.com"
 const contras = "alejandro123"
 
-
 //Limpiar la base de datos antes de ejecutar el testeo
 // beforeEach(async () => {
 //   await User.destroy({ truncate: true });
