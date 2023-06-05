@@ -10,7 +10,7 @@ afterAll(async () => {
 
 describe('getContactByName', () => {
   it('should get a contact by Name', async () => {
-    const contactLastName= 'Toy';
+    const contactLastName= 'Doe';
     const req = { 
       body: { 
         lastname: contactLastName

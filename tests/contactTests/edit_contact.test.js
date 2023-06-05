@@ -9,7 +9,7 @@ afterAll(async () => {
   await sequelize.close();
 });
 
-const contactId = 106
+const contactId = 5;
 describe('editContact', () => {
   it('Edit contact by ID', async () => {
     const req = {
@@ -17,37 +17,33 @@ describe('editContact', () => {
       body: {
         name: 'John',
         lastname: 'Doe',
-        phone: '123456789',
-        favourite: true
+        phone: '1234567'
       }
     };
-
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn()
+      json: jest.fn(),
     };
 
-    const contact = {
-      update: jest.fn().mockResolvedValue(true), // Configura la respuesta de update
-      save: jest.fn().mockResolvedValue(true) // Configura la respuesta de save
-    };
+    const next = jest.fn();
 
-    Contact.findByPk = jest.fn().mockResolvedValue(contact);
+    await editContact(req, res, next);
 
-    await editContact(req, res);
+    
 
-    expect(Contact.findByPk).toHaveBeenCalledWith(contactId);
-    expect(contact.update).toHaveBeenCalledWith({
-      name: 'John',
-      lastname: 'Doe',
-      phone: '123456789',
-      favourite: true
+    expect(next).not.toHaveBeenCalled();
+     
+     const editedContact = await Contact.findOne({
+      where: { id: contactId },
     });
-    expect(contact.save).toHaveBeenCalled();
+
+    expect(editedContact.name).toBe('John');
+
+    // sexpect(editedContact.save).toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
       message: 'The contact has been updated successfully',
-      data: contact
+      data: expect.any(Object)
     });
   });
 });

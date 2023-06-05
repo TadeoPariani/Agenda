@@ -10,7 +10,7 @@ afterAll(async () => {
 
 describe('deleteContact', () => {
   it('should delete a contact by ID', async () => {
-    const contactId= 106;
+    const contactId= 2;
     const req = { 
       params: { 
         id: contactId

@@ -10,7 +10,7 @@ afterAll(async () => {
 
 describe('getContactById', () => {
   it('should get a contact by ID', async () => {
-    const contactId= 107;
+    const contactId= 4;
     const req = { 
       params: { 
         id: contactId

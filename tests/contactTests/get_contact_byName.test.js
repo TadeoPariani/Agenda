@@ -11,7 +11,7 @@ afterAll(async () => {
 
 describe('getContactByName', () => {
   it('should get a contact by Name', async () => {
-    const contactName= 'Encontrame';
+    const contactName= 'John';
     const req = { 
       body: { 
         name: contactName
