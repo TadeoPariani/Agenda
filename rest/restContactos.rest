@@ -11,10 +11,19 @@ GET http://localhost:3001/contact/1 HTTP/1.1
 content-type: application/json
 
 ### Search contact by name from the body
-GET http://localhost:3001/contact/search HTTP/1.1 
+GET http://localhost:3001/contact/search_name HTTP/1.1 
 content-type: application/json
+
 {
 "name":"Alfredo"
+}
+
+### Search contact by lastname from the body
+GET http://localhost:3001/contact/search_lastname HTTP/1.1 
+content-type: application/json
+
+{
+    "lastname":"Juan"
 }
 
 ### Create contact
@@ -24,7 +33,8 @@ content-type: application/json
 {
     "name":"Alfredo",
     "lastname": "Juan",
-    "phone":"08102224458"
+    "phone":"08342224458",
+    "favourite":true
 }
 
 ### Update contact
@@ -32,9 +42,9 @@ PUT http://localhost:3001/contact/1 HTTP/1.1
 content-type: application/json
 
 {
-"name":"Alfero", "phone":"0855599924458"
+"name":"Ismael","lastname":"Rodriguez", "phone":"0855599924458"
 }
 
 ### Delete contact
-DELETE http://localhost:3003/contact/1 HTTP/1.1 
+DELETE http://localhost:3003/contact/2 HTTP/1.1 
 content-type: application/json

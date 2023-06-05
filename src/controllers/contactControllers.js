@@ -94,9 +94,9 @@ const deleteContact = async (req, res, next) => {
 
 
 // Update contact
-const updateContact = async (req, res, next) => {
-  const { id } = req.params;
-  const { name, phone, favourite } = req.body;
+const editContact = async (req, res, next) => {
+  const id = req.params.id
+  const { name, lastname,phone, favourite } = req.body;
 
   try {
     const contact = await Contact.findByPk(id);
@@ -107,6 +107,7 @@ const updateContact = async (req, res, next) => {
 
     const updatedFields = {};
     if (name) updatedFields.name = name;
+    if (name) updatedFields.lastname = lastname;
     if (phone) updatedFields.phone = phone;
     if (favourite !== undefined) updatedFields.favourite = favourite;
 
@@ -128,17 +129,23 @@ const updateContact = async (req, res, next) => {
 
 // Get favourites contacts
 const getFavouritesContacts = async (req, res, next) => {
-  try{
-  const favourites = await Contact.findAll({ where: { favourite: true }});
-  res.json({
-    message: "Here are your favourite Contacts",
-    data: favourites,
-  });
-  }catch{
-    console.error(err);
-    res.status(500).json({ error: 'Internal server error' });
+  try {
+    const favourites = await Contact.findAll({ where: { favourite: true } });
+
+    if (favourites.length === 0) {
+      return res.status(404).json({ message: 'You have no favorite contacts' });
+    }
+
+    return res.json({
+      message: 'Here are your favourite Contacts',
+      data: favourites,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 const getContactbyName = async (req, res, next) => {
   const { name } = req.body;
@@ -163,15 +170,38 @@ const getContactbyName = async (req, res, next) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+const getContactbyLastName = async (req, res, next) => {
+  const { lastname } = req.body;
 
+  if (!lastname || typeof lastname !== 'string' || lastname.trim() === '') {
+    return res.status(400).json({ error: 'Please provide a valid lastname' });
+  }
+
+  try {
+    const filter = await Contact.findAll({ where: { lastname: lastname } });
+
+    if (filter.length === 0) {
+      return res.status(404).json({ error: 'Contact not found' });
+    }
+
+    res.json({
+      message: 'Search result:',
+      data: filter,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 
 module.exports = {
   getContacts,
   getContactbyID,
   addContact,
   deleteContact,
-  updateContact,
+  editContact,
   getFavouritesContacts,
-  getContactbyName
+  getContactbyName,
+  getContactbyLastName
  
 };
