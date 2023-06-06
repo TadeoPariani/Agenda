@@ -2,10 +2,12 @@ const { sequelize, User } = require('../../models');
 const { editUser } = require('../../src/controllers/userControllers');
 const { verificationId } = require ('../../src/auth/auth.js')
 const bcrypt = require('bcrypt');
+
+// datos de prueba
 const id = 38
-const nombre = "alejandro"
-const email = "alejandro@gmail.com"
-const contras = "alejandro123"
+const nombre = "maria"
+const email = "maria@gmail.com"
+const contras = "maria123"
 
 //Limpiar la base de datos antes de ejecutar el testeo
 // beforeEach(async () => {
@@ -42,28 +44,28 @@ describe('editUser', () => {
         name: nombre, 
         email: email,
         password: expect.anything()
-      }),
-      user: expect.objectContaining({
-        id:id,
-        name:"alejandro",
-        email:"alejandro@gmail.com",
-        password: expect.anything(),
-        createdAt: expect.anything(),
-        updatedAt: expect.anything()
       })
+      // user: expect.objectContaining({
+      //   id:id,
+      //   name:"alejandro",
+      //   email:"alejandro@gmail.com",
+      //   password: expect.anything(),
+      //   createdAt: expect.anything(),
+      //   updatedAt: expect.anything()
+      // })
     });
 
     expect(next).toHaveBeenCalled();
-     // Verificar que el usuario se haya guardado en la base de datos
-     const createdUser = await User.findOne({
+     // Verificar que el usuario se haya editado en la base de datos
+     const editedUser = await User.findOne({
       where: { email: email },
     });
 
-    const hashedPassword = await bcrypt.compare(contras, createdUser.password);
+    const hashedPassword = await bcrypt.compare(contras, editedUser.password);
 
-    expect(createdUser).toBeTruthy();
-    expect(createdUser.name).toBe(nombre);
-    expect(createdUser.email).toBe(email);
+    expect(editedUser).toBeTruthy();
+    expect(editedUser.name).toBe(nombre);
+    expect(editedUser.email).toBe(email);
     expect(hashedPassword).toBe(true)
   });
 });

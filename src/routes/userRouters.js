@@ -23,7 +23,4 @@ router.put('/:id', verificationId, editUser)
 
 router.delete('/:id', verificationId, deleteUser)
 
-
-
-
 module.exports = router;
