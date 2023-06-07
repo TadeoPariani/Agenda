@@ -1,12 +1,12 @@
 const { getContactbyID } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
-beforeAll(async () => {
-  await sequelize.authenticate();
-});
+// beforeAll(async () => {
+//   await sequelize.authenticate();
+// });
 
-afterAll(async () => {
-  await sequelize.close();
-});
+// afterAll(async () => {
+//   await sequelize.close();
+// });
 
 describe('getContactById', () => {
   it('should get a contact by ID', async () => {

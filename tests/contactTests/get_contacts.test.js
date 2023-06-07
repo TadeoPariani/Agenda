@@ -5,13 +5,13 @@ const { getContacts } = require('../../src/controllers/contactControllers');
 //   await Contact.destroy({ truncate: true });
 // });
 
-beforeAll(async () => {
-  await sequelize.authenticate(); 
-});
+// beforeAll(async () => {
+//   await sequelize.authenticate(); 
+// });
 
-afterAll(async () => {
-  await sequelize.close(); 
-});
+// afterAll(async () => {
+//   await sequelize.close(); 
+// });
 
 
 describe('getContacts', () => {

@@ -1,23 +1,28 @@
 const { editContact } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
 
-beforeAll(async () => {
-  await sequelize.authenticate();
-});
+// beforeAll(async () => {
+//   await sequelize.authenticate();
+// });
 
-afterAll(async () => {
-  await sequelize.close();
-});
+// afterAll(async () => {
+//   await sequelize.close();
+// });
 
-const contactId = 5;
+const name = 'Ornelio'
+const lastname = 'Prieto'
+const phone = '99874441'
+const favourite = true
+
+const contactId = 109;
 describe('editContact', () => {
   it('Edit contact by ID', async () => {
     const req = {
       params: { id: contactId },
       body: {
-        name: 'John',
-        lastname: 'Doe',
-        phone: '1234567'
+        name: name,
+        lastname: lastname,
+        phone: phone
       }
     };
     const res = {
@@ -37,7 +42,8 @@ describe('editContact', () => {
       where: { id: contactId },
     });
 
-    expect(editedContact.name).toBe('John');
+    expect(editedContact.name).toBe(name);
+    expect(editedContact.lastname).toBe(lastname);
 
     // sexpect(editedContact.save).toHaveBeenCalled();
     expect(res.status).toHaveBeenCalledWith(200);
