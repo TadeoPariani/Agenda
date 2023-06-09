@@ -11,11 +11,11 @@ const getContacts = async (req, res, next) => {
   try {
     const viewAllContacts = await Contact.findAll({});
     if (viewAllContacts.length === 0) {
-      res.json({
+      res.status(204).json({
         message: "Your contact book is empty",
       });
     } else {
-      res.json({
+      res.status(200).json({
         message: "Here are all your available Contacts",
         data: viewAllContacts,
       });
@@ -31,7 +31,7 @@ const getContacts = async (req, res, next) => {
 const getContactbyID = async (req, res,next) => {
   try{
   const viewContact = await Contact.findOne({where: {id: req.params.id}})
-  res.json(
+  res.status(200).json(
     {
       message:"Here is your Contact", 
       data:viewContact
@@ -80,7 +80,7 @@ const deleteContact = async (req, res, next) => {
   const { id } = req.params;
   try {
     const deletedContact = await Contact.destroy({ where: { id } });
-    return res.status(204).json({
+    return res.status(200).json({
       message: 'Contact has been deleted successfully',
     });
     
@@ -133,10 +133,10 @@ const getFavouritesContacts = async (req, res, next) => {
     const favourites = await Contact.findAll({ where: { favourite: true } });
 
     if (favourites.length === 0) {
-      return res.status(404).json({ message: 'You have no favorite contacts' });
+      return res.status(204).json({ message: 'You have no favorite contacts' });
     }
 
-    return res.json({
+    return res.status(200).json({
       message: 'Here are your favourite Contacts',
       data: favourites,
     });
@@ -151,7 +151,7 @@ const getContactbyName = async (req, res, next) => {
   const { name } = req.body;
 
   if (!name || typeof name !== 'string' || name.trim() === '') {
-    return res.status(400).json({ error: 'Please provide a valid name' });
+    return res.status(404).json({ error: 'Please provide a valid name' });
   }
 
   try {
@@ -161,7 +161,7 @@ const getContactbyName = async (req, res, next) => {
       return res.status(404).json({ error: 'Contact not found' });
     }
 
-    res.json({
+    res.status(200).json({
       message: 'Search result:',
       data: filter,
     });
@@ -174,7 +174,7 @@ const getContactbyLastName = async (req, res, next) => {
   const { lastname } = req.body;
 
   if (!lastname || typeof lastname !== 'string' || lastname.trim() === '') {
-    return res.status(400).json({ error: 'Please provide a valid lastname' });
+    return res.status(404).json({ error: 'Please provide a valid lastname' });
   }
 
   try {
@@ -184,7 +184,7 @@ const getContactbyLastName = async (req, res, next) => {
       return res.status(404).json({ error: 'Contact not found' });
     }
 
-    res.json({
+    res.status(200).json({
       message: 'Search result:',
       data: filter,
     });

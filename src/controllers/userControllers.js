@@ -1,7 +1,7 @@
 const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
-const { hashPass } = require('../auth/auth');
-const { userSchema } = require('../auth/auth')
+const { hashPass,userSchema } = require('../auth/auth');
+//const {  } = require('../auth/auth')
 
 
 const getUsers = async (req, res, next) => {
