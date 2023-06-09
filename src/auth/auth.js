@@ -1,8 +1,10 @@
 import { json } from 'sequelize';
 const bcrypt = require('bcrypt');
 const Joi = require('joi')
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const { sequelize, Sequelize, User} = require ('../../models')
+require('dotenv').config()
 
 export async function hashPass(body) {
   const saltRounds = 10;
@@ -14,7 +16,6 @@ export async function hashPass(body) {
     return null;
   }
 }
-
 
 export const contactSchema = Joi.object({
   name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).required()
@@ -47,12 +48,45 @@ export const userSchema = Joi.object({
   })
 });
 
+function generateToken(body) {
+  let payload = {
+    'name': body.name,
+    'email': body.email,
+    'password': body.password
+  }
+  let algorithm = 'HS256'
+  let token = jwt.sign(payload, process.env.CLAVE_SECRETA,{expiresIn: "1h",})
+  return token
+}
+
+export async function verifyToken(token) {
+  try {
+    const decoded = await jwt.verify(token, process.env.CLAVE_SECRETA);
+    return decoded;
+  } catch (error) {
+    console.log('Error al verificar el token:', error.message);
+    return null;
+  }
+}
+
+export function verifyLogin(token){
+  console.log(token, "---------------------------------")
+  if(token != undefined){
+    console.log("------------------------------------------------------")
+    return true
+  }
+}
+
 export const login = async (req, res, next) => {
   let headers = req.headers
+  let body = req.body
   const admin = await User.findByPk(3);
   bcrypt.compare(headers.adminpassword, admin.password, async function(err, result){
       if (result == true) {
-          next()
+        let generatedToken = generateToken(body)
+        console.log(generatedToken)
+        res.locals.token = generatedToken
+        next()
       } else {
           res.status(400).json({Status: "Wrong password, try again"})
       }

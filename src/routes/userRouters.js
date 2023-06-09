@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { login } = require('../auth/auth');
-const { verificationId } = require('../auth/auth')
+const { verificationId, verifyLogin } = require('../auth/auth')
+
 
 const {
 
@@ -14,6 +15,8 @@ const {
 } = require('../controllers/userControllers')
 
 router.get('/', getUsers)
+
+router.post('/login')
 
 router.get('/:id', verificationId, getUser)
 

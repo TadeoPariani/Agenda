@@ -2,6 +2,9 @@ const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
 const { hashPass } = require('../auth/auth');
 const { userSchema } = require('../auth/auth')
+const { generatedToken } = require('../auth/auth')
+const { verifyToken } = require('../auth/auth.js')
+const { verifyLogin } = require('../auth/auth')
 
 
 const getUsers = async (req, res, next) => {
@@ -21,6 +24,8 @@ const getUser = async (req, res, next) => {
 
 const addUser = async (req, res, next) => {
     let body = req.body;
+    const token = res.locals.token;
+    verifyToken(token)
     try {
         const validatedData = await userSchema.validateAsync(body)
         const existingUserEmail = await User.findOne({
@@ -36,7 +41,12 @@ const addUser = async (req, res, next) => {
         if (hashedPassword) {
             validatedData.password = hashedPassword
             // await User.create(validatedData)
+<<<<<<< Updated upstream
             res.status(201).json({message: 'New user has been created successfully', data: validatedData});
+=======
+            console.log(generatedToken)
+            res.status(201).json({message: 'New user has been created successfully', data: token});
+>>>>>>> Stashed changes
         }
     }catch (err) {
         if (err.details) {
@@ -76,17 +86,24 @@ const editUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     let id = req.params.id
-    const existingUser = await User.findByPk(id);
-    if (existingUser){
-        await existingUser.destroy({
-            where: {
-              id: id
-            }
-        });
-        const UsersDb  = await User.findAll({})
-        res.status(200).json({ message: 'User deleted', data: UsersDb })
+    const token = res.locals.token;
+    console.log(token)
+    if (verifyLogin(token)){
+        console.log("eliminar user-----------------")
+        // const existingUser = await User.findByPk(id);
+        // if (existingUser){
+        //     // await existingUser.destroy({
+        //     //     where: {
+        //     //     id: id
+        //     //     }
+        //     // });
+        //     const UsersDb  = await User.findAll({})
+        //     res.status(200).json({ message: 'User deleted', data: UsersDb })
+        // }else{
+        //     res.status(400).json({ error: "bad request" })
+        // }
     }else{
-        res.status(400).json({ error: "bad request" })
+        res.status(401).json({data: "mal", token: token})
     }
 }
 
