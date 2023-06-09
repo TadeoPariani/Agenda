@@ -1,17 +1,7 @@
 const { sequelize, Sequelize, User } = require('../../models');
 const { getUsers } = require('../../src/controllers/userControllers');
 
-// beforeEach(async () => {
-//   await User.destroy({ truncate: true });
-// });
 
-beforeAll(async () => {
-  await sequelize.authenticate(); // Conectarse a la base de datos
-});
-
-afterAll(async () => {
-  await sequelize.close(); // Cerrar la conexión a la base de datos
-});
 
 
 describe('getUsers', () => {

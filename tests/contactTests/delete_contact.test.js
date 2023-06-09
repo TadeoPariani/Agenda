@@ -1,16 +1,10 @@
 const { deleteContact } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
-// beforeAll(async () => {
-//   await sequelize.authenticate();
-// });
 
-// afterAll(async () => {
-//   await sequelize.close();
-// });
 
+const contactId= 117;
 describe('deleteContact', () => {
   it('should delete a contact by ID', async () => {
-    const contactId= 113;
     const req = { 
       params: { 
         id: contactId

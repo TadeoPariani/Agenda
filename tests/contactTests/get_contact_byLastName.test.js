@@ -1,16 +1,9 @@
 const { getContactbyLastName } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
-// beforeAll(async () => {
-//   await sequelize.authenticate();
-// });
 
-// afterAll(async () => {
-//   await sequelize.close();
-// });
-
+const contactLastName= 'Meridio';
 describe('getContactByLastame', () => {
   it('should get a contact by Lastname', async () => {
-    const contactLastName= 'Julian';
     const req = { 
       body: { 
         lastname: contactLastName

@@ -4,15 +4,11 @@ const { verificationId } = require ('../../src/auth/auth.js')
 const bcrypt = require('bcrypt');
 
 // datos de prueba
-const id = 38
-const nombre = "maria"
-const email = "maria@gmail.com"
-const contras = "maria123"
+const id = 1
+const nombre = "Anacleta"
+const email = "cancheta@gmail.com"
+const contras = "chancla123"
 
-//Limpiar la base de datos antes de ejecutar el testeo
-// beforeEach(async () => {
-//   await User.destroy({ truncate: true });
-// });
 
 describe('editUser', () => {
   it('User has been edited successfully', async () => {

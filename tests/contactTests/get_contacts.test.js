@@ -1,17 +1,7 @@
 const { sequelize, Sequelize, Contact } = require('../../models');
 const { getContacts } = require('../../src/controllers/contactControllers');
 
-// beforeEach(async () => {
-//   await Contact.destroy({ truncate: true });
-// });
 
-// beforeAll(async () => {
-//   await sequelize.authenticate(); 
-// });
-
-// afterAll(async () => {
-//   await sequelize.close(); 
-// });
 
 
 describe('getContacts', () => {

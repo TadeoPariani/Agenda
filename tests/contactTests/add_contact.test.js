@@ -6,16 +6,10 @@ const { addContact } = require('../../src/controllers/contactControllers');
 //   await Contact.destroy({ truncate: true });
 // });
 
-// beforeAll(async () => {
-//   await sequelize.authenticate(); // Conectarse a la base de datos
-// });
 
-// afterAll(async () => {
-//   await sequelize.close(); // Cerrar la conexión a la base de datos
-// });
-const name = 'Contacto'
-const lastname = 'Eliminar'
-const phone = '648484474'
+const name = 'Contaaaa'
+const lastname = 'Eliaaa'
+const phone = '111111423'
 const favourite = true
 describe('addContact', () => {
   it('should create a new contact', async () => {

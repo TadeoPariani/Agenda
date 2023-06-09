@@ -1,15 +1,11 @@
 const { sequelize, User } = require('../../models');
 const { addUser } = require('../../src/controllers/userControllers');
 const bcrypt = require('bcrypt');
-const nombre = "juana"
-const email = "juana@gmail.com"
-const contras = "juana123"
+const nombre = "Harraaaaaaaay"
+const email = "adaaaad@gmail.com"
+const contras = "eldajaaaayta"
 
 
-//Limpiar la base de datos antes de ejecutar el testeo
-// beforeEach(async () => {
-//   await User.destroy({ truncate: true });
-// });
 
 describe('addUser', () => {
   it('New user has been created successfully', async () => {

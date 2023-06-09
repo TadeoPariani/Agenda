@@ -1,20 +1,14 @@
 const { editContact } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
 
-// beforeAll(async () => {
-//   await sequelize.authenticate();
-// });
 
-// afterAll(async () => {
-//   await sequelize.close();
-// });
 
+const contactId = 110;
 const name = 'Ornelio'
 const lastname = 'Prieto'
 const phone = '99874441'
 const favourite = true
 
-const contactId = 109;
 describe('editContact', () => {
   it('Edit contact by ID', async () => {
     const req = {
