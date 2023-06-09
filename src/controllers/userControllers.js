@@ -35,7 +35,7 @@ const addUser = async (req, res, next) => {
         const hashedPassword = await hashPass(body.password);
         if (hashedPassword) {
             validatedData.password = hashedPassword
-            // await User.create(validatedData)
+            await User.create(validatedData)
             res.status(201).json({message: 'New user has been created successfully', data: validatedData});
         }
     }catch (err) {

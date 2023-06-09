@@ -1,9 +1,9 @@
 const { sequelize, User } = require('../../models');
 const { addUser } = require('../../src/controllers/userControllers');
 const bcrypt = require('bcrypt');
-const nombre = "pedro"
-const email = "pedro@gmail.com"
-const contras = "pedro123"
+const nombre = "juana"
+const email = "juana@gmail.com"
+const contras = "juana123"
 
 
 //Limpiar la base de datos antes de ejecutar el testeo
