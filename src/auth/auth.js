@@ -4,25 +4,6 @@ const Joi = require('joi')
 const express = require('express');
 const { sequelize, Sequelize, User} = require ('../../models')
 const jwt = require('jsonwebtoken')
-import jwt_decode from "jwt-decode";
-
-//MIDDLEWARE PARA VALIDAD EL TOKEN QUE SE ENVIEN POR RUTAS
-export const verifyToken = (req, res, next) => {
-  try {const token =authToken['auth-token']; 
-  console.log("Valor del token ->>>>>>",token)
-  if (!token) {
-    return res.status(401).json({ error: 'Acceso denegado' });
-  }
-  
-  
-    const decoded = jwt.verify(token, process.env.CLAVE_TOKEN); // Verificar y decodificar el token
-    console.log('VALOR DEL TOKEN DECODIFICADO', decoded);
-    req.user = decoded; // Asignar el contenido decodificado a req.user para acceder a él en rutas posteriores
-    next(); // Continuar al siguiente middleware o ruta
-  } catch (error) {
-    res.status(400).json({ error: 'Token no es válido' });
-  }
-};
 
 export const schemaLogin = Joi.object({
   name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()
@@ -82,18 +63,7 @@ export const userSchema = Joi.object({
   })
 });
 
-export const login = async (req, res, next) => {
-  let headers = req.headers
-  const admin = await User.findByPk(3);
-  bcrypt.compare(headers.adminpassword, admin.password, async function(err, result){
-      if (result == true) {
-          next()
-      } else {
-          res.status(400).json({Status: "Wrong password, try again"})
-      }
-    }
-  )
-}
+
 
 export const verificationId = async (req, res, next) => {
   let id = req.params.id

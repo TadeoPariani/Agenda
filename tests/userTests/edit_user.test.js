@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 // datos de prueba
 const id = 1
 const nombre = "Anacleta"
-const email = "cancheta@gmail.com"
+const email = "chancleta@gmail.com"
 const contras = "chancla123"
 
 
@@ -41,14 +41,6 @@ describe('editUser', () => {
         email: email,
         password: expect.anything()
       })
-      // user: expect.objectContaining({
-      //   id:id,
-      //   name:"alejandro",
-      //   email:"alejandro@gmail.com",
-      //   password: expect.anything(),
-      //   createdAt: expect.anything(),
-      //   updatedAt: expect.anything()
-      // })
     });
 
     expect(next).toHaveBeenCalled();

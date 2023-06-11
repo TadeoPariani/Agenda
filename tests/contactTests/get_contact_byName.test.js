@@ -18,7 +18,6 @@ describe('getContactByName', () => {
 
     await getContactbyName(req, res, next);
 
-    //expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
         message:"Search result:",
         data:expect.any(Array)

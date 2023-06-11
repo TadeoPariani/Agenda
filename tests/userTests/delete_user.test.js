@@ -2,7 +2,7 @@ const { sequelize, User } = require('../../models');
 const { deleteUser } = require('../../src/controllers/userControllers');
 const { verificationId } = require ('../../src/auth/auth.js')
 
-const id = 6
+const id = 8
 
 describe('Delete User', () => {
   it('should delete one user from the database', async () => {

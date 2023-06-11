@@ -18,7 +18,6 @@ describe('getContactById', () => {
 
     await getContactbyID(req, res, next);
 
-    //expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
         message:"Here is your Contact",
         data:expect.any(Object)

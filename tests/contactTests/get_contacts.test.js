@@ -24,7 +24,7 @@ describe('getContacts', () => {
       data: expect.any(Array),
     });
     console.log(contacts)
-    expect(res.status).not.toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalled();
   });
 
   

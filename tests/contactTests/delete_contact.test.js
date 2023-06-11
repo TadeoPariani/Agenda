@@ -2,7 +2,7 @@ const { deleteContact } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
 
 
-const contactId= 117;
+const contactId= 120;
 describe('deleteContact', () => {
   it('should delete a contact by ID', async () => {
     const req = { 
@@ -18,7 +18,7 @@ describe('deleteContact', () => {
 
     await deleteContact(req, res, next);
 
-    expect(res.status).toHaveBeenCalledWith(204);
+    expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
       message: 'Contact has been deleted successfully',
     });

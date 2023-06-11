@@ -6,7 +6,7 @@ const { sequelize, Sequelize, Contact } = require('../../models');
 const contactId = 110;
 const name = 'Ornelio'
 const lastname = 'Prieto'
-const phone = '99874441'
+const phone = '911894441'
 const favourite = true
 
 describe('editContact', () => {

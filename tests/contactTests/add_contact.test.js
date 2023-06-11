@@ -7,10 +7,10 @@ const { addContact } = require('../../src/controllers/contactControllers');
 // });
 
 
-const name = 'Contaaaa'
-const lastname = 'Eliaaa'
-const phone = '111111423'
-const favourite = true
+const name = 'Ermasdaddldo'
+const lastname = 'deLadasdadsas'
+const phone = '234873413'
+const favourite = false
 describe('addContact', () => {
   it('should create a new contact', async () => {
     const req = {

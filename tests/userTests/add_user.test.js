@@ -1,9 +1,9 @@
 const { sequelize, User } = require('../../models');
 const { addUser } = require('../../src/controllers/userControllers');
 const bcrypt = require('bcrypt');
-const nombre = "Harraaaaaaaay"
-const email = "adaaaad@gmail.com"
-const contras = "eldajaaaayta"
+const nombre = "Eadaddsad"
+const email = "paddaso@gmail.com"
+const contras = "asdadadaddsadasdlñ"
 
 
 
