@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const attachToken = (req, res, next) => {
   try {
-    const cookie = req.headers.cookie;
+    const { cookie } = req.headers;
     let authToken;
     if (cookie) {
       const cookies = cookie.split(';');
@@ -15,12 +15,12 @@ const attachToken = (req, res, next) => {
           break;
         }
       }
-      console.log('VALOR DE LA COOKIE ->', authToken);
     }
 
     req.authToken = authToken;
     next();
-  } catch {
+  }
+  catch {
     res.status(400).json({ Status: 'Wrong password, try again' });
   }
 };
@@ -35,12 +35,13 @@ const verifyToken = (req, res, next) => {
     const decoded = jwt.verify(token, process.env.CLAVE_TOKEN);
     req.user = decoded;
     next();
-  } catch (error) {
+  }
+  catch (error) {
     res.status(400).json({ error: 'Invalid token' });
   }
 };
 
 module.exports = {
   attachToken,
-  verifyToken,
+  verifyToken
 };

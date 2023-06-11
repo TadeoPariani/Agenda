@@ -1,16 +1,15 @@
 const { sequelize, Contact } = require('../../models');
 const { addContact } = require('../../src/controllers/contactControllers');
 
-//Limpiar la base de datos antes de ejecutar el testeo
+// Limpiar la base de datos antes de ejecutar el testeo
 //  beforeEach(async () => {
 //   await Contact.destroy({ truncate: true });
 // });
 
-
-const name = 'Ermasdaddldo'
-const lastname = 'deLadasdadsas'
-const phone = '234873413'
-const favourite = false
+const name = 'Ermasdaddldo';
+const lastname = 'deLadasdadsas';
+const phone = '234873413';
+const favourite = false;
 describe('addContact', () => {
   it('should create a new contact', async () => {
     const req = {
@@ -18,13 +17,13 @@ describe('addContact', () => {
         name: name,
         lastname: lastname,
         phone: phone,
-        favourite: favourite,
-      },
+        favourite: favourite
+      }
     };
 
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      json: jest.fn()
     };
 
     const next = jest.fn();
@@ -37,19 +36,18 @@ describe('addContact', () => {
         name: name,
         lastname: lastname,
         phone: phone,
-        favourite: favourite,
-      }),
+        favourite: favourite
+      })
     });
     expect(res.status).toHaveBeenCalledWith(201);
     expect(next).not.toHaveBeenCalled();
-     const createdContact = await Contact.findOne({
-      where: { phone: phone },
+    const createdContact = await Contact.findOne({
+      where: { phone: phone }
     });
-   
+
     expect(createdContact).toBeTruthy();
     expect(createdContact.name).toBe(name);
     expect(createdContact.lastname).toBe(lastname);
     expect(createdContact.favourite).toBe(favourite);
   });
-
 });

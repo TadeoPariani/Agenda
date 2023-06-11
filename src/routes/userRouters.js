@@ -1,74 +1,68 @@
 const express = require('express');
+
 const router = express.Router();
-const { verificationId,schemaLogin } = require('../auth/auth');
-const Joi = require('joi')
+const Joi = require('joi');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
-require('dotenv').config()
-const { sequelize, Sequelize, User} = require ('../../models')
-//import jwt_decode from "jwt-decode";
+const jwt = require('jsonwebtoken');
+const { verificationId, schemaLogin } = require('../auth/auth');
+require('dotenv').config();
+const { sequelize, Sequelize, User } = require('../../models');
+
 const { attachToken, verifyToken } = require('../auth/authLogin');
 
-
 const {
-  
-   getUsers,
-   getUser,
-   editUser,
-   deleteUser,
-   addUser
+  getUsers,
+  getUser,
+  editUser,
+  deleteUser,
+  addUser
+} = require('../controllers/userControllers');
 
-} = require('../controllers/userControllers')
-
-//let authToken;
+// let authToken;
 
 router.post('/login', async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    const admin = await User.findByPk(2);
+    const admin = await User.findByPk(3);
     bcrypt.compare(password, admin.password, async function (err, result) {
       if (result === true) {
-        let payload = {
+        const payload = {
           name: name,
           email: email,
           password: password
         };
-        const token = jwt.sign(payload, process.env.CLAVE_TOKEN, { expiresIn: "1h" });
-      
-        res.cookie('auth-token',{ 'auth-token': token });
-
+        const token = jwt.sign(payload, process.env.CLAVE_TOKEN, { expiresIn: '1h' });
+        res.cookie('auth-token', { 'auth-token': token });
         res.header('auth-token', token).json({
-          message:'Session successfully started',
-          data: {token}
-      })
-        
-        
-      } else {
-        res.status(400).json({ Status: "Wrong password, try again" });
+          message: 'Session successfully started',
+          data: { token }
+        });
+      }
+      else {
+        res.status(400).json({ Status: 'Wrong password, try again' });
       }
     });
-  } catch (error) {
+  }
+  catch (error) {
     next(error);
   }
 });
 
-router.use(attachToken)
-
+router.use(attachToken);
 
 router.get('/logout', (req, res) => {
   res.clearCookie('auth-token'); // Elimina la cookie 'auth-token'
   res.json({ message: 'Logged out successfully' });
-  
 });
 
-router.get('/',getUsers)
+router.get('/', getUsers);
 
-router.get('/:id',attachToken,verifyToken , verificationId, getUser)
+router.get('/:id', attachToken, verifyToken, verificationId, getUser);
 
-router.post('/', attachToken,verifyToken ,addUser)
+router.post('/', attachToken, verifyToken, addUser);
 
-router.put('/:id', attachToken,verifyToken ,verificationId, editUser)
+router.put('/:id', attachToken, verifyToken, verificationId, editUser);
 
-router.delete('/:id', attachToken,verifyToken ,verificationId, deleteUser)
+router.delete('/:id', attachToken, verifyToken, verificationId, deleteUser);
 
 module.exports = router;

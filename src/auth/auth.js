@@ -1,7 +1,6 @@
 import { json } from 'sequelize';
 const bcrypt = require('bcrypt');
 const Joi = require('joi')
-const jwt = require('jsonwebtoken');
 const express = require('express');
 const { sequelize, Sequelize, User} = require ('../../models')
 const jwt = require('jsonwebtoken')

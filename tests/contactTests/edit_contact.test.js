@@ -1,13 +1,11 @@
 const { editContact } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
 
-
-
 const contactId = 110;
-const name = 'Ornelio'
-const lastname = 'Prieto'
-const phone = '911894441'
-const favourite = true
+const name = 'Ornelio';
+const lastname = 'Prieto';
+const phone = '911894441';
+const favourite = true;
 
 describe('editContact', () => {
   it('Edit contact by ID', async () => {
@@ -21,19 +19,17 @@ describe('editContact', () => {
     };
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      json: jest.fn()
     };
 
     const next = jest.fn();
 
     await editContact(req, res, next);
 
-    
-
     expect(next).not.toHaveBeenCalled();
-     
-     const editedContact = await Contact.findOne({
-      where: { id: contactId },
+
+    const editedContact = await Contact.findOne({
+      where: { id: contactId }
     });
 
     expect(editedContact.name).toBe(name);

@@ -1,16 +1,14 @@
 const { sequelize, Sequelize, Contact } = require('../../models');
 const { getFavouritesContacts } = require('../../src/controllers/contactControllers');
 
-
 describe('getFavouritesContacts', () => {
   it('should retrieve all favourites contacts from the database', async () => {
     const contacts = await Contact.findAll({ where: { favourite: true } });
-    console.log(contacts);
 
     const req = {};
     const res = {
       json: jest.fn(),
-      status: jest.fn().mockReturnThis(),
+      status: jest.fn().mockReturnThis()
     };
     const next = jest.fn();
 
@@ -18,7 +16,7 @@ describe('getFavouritesContacts', () => {
 
     expect(res.json).toHaveBeenCalledWith({
       message: 'Here are your favourite Contacts',
-      data: expect.any(Array),
+      data: expect.any(Array)
     });
     expect(res.status).toHaveBeenCalled();
   });

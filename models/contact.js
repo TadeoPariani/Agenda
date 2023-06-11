@@ -1,7 +1,7 @@
-'use strict';
 const {
   Model
 } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Contact extends Model {
     static associate(models) {
@@ -9,24 +9,24 @@ module.exports = (sequelize, DataTypes) => {
   }
   Contact.init({
     name: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     lastname: {
       type: DataTypes.STRING,
       allowNull: false
     },
     phone: {
-          type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
     favourite: {
-        type: DataTypes.BOOLEAN,
-        defaultValue:false
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     sequelize,
-    modelName: 'Contact',
+    modelName: 'Contact'
   });
   return Contact;
 };

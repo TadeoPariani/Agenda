@@ -1,11 +1,10 @@
+const bcrypt = require('bcrypt');
 const { sequelize, User } = require('../../models');
 const { addUser } = require('../../src/controllers/userControllers');
-const bcrypt = require('bcrypt');
-const nombre = "Eadaddsad"
-const email = "paddaso@gmail.com"
-const contras = "asdadadaddsadasdlñ"
 
-
+const nombre = 'Eadaddsad';
+const email = 'paddaso@gmail.com';
+const contras = 'asdadadaddsadasdlñ';
 
 describe('addUser', () => {
   it('New user has been created successfully', async () => {
@@ -14,12 +13,12 @@ describe('addUser', () => {
         name: nombre,
         email: email,
         password: contras
-      },
+      }
     };
 
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      json: jest.fn()
     };
 
     const next = jest.fn();
@@ -30,16 +29,16 @@ describe('addUser', () => {
     expect(res.json).toHaveBeenCalledWith({
       message: 'New user has been created successfully',
       data: expect.objectContaining({
-        name: nombre, 
+        name: nombre,
         email: email,
         password: expect.anything()
-      }),
+      })
     });
 
     expect(next).not.toHaveBeenCalled();
-     // Verificar que el usuario se haya guardado en la base de datos
-     const createdUser = await User.findOne({
-      where: { email: email },
+    // Verificar que el usuario se haya guardado en la base de datos
+    const createdUser = await User.findOne({
+      where: { email: email }
     });
 
     const hashedPassword = await bcrypt.compare(contras, createdUser.password);
@@ -47,6 +46,6 @@ describe('addUser', () => {
     expect(createdUser).toBeTruthy();
     expect(createdUser.name).toBe(nombre);
     expect(createdUser.email).toBe(email);
-    expect(hashedPassword).toBe(true)
+    expect(hashedPassword).toBe(true);
   });
 });
