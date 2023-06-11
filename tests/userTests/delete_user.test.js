@@ -1,29 +1,30 @@
-const { sequelize, User } = require('../../models');
-const { deleteUser } = require('../../src/controllers/userControllers');
-const { verificationId } = require ('../../src/auth/auth.js')
+const { sequelize, User } = require("../../models");
+const { deleteUser } = require("../../src/controllers/userControllers");
+const { verificationId } = require("../../src/auth/auth.js");
 
-const id = 8
+const id = 8;
 
-describe('Delete User', () => {
-  it('should delete one user from the database', async () => {
+describe("Delete User", () => {
+  it("should delete one user from the database", async () => {
     const req = {
       params: {
-          id:id
-      }
-    }; // Simula el objeto de solicitud
+        id: id,
+      },
+    }; // Simula el objeto de solicitudPPPP
 
-    const res = { // Simula el objeto de respuesta
+    const res = {
+      // Simula el objeto de respuesta
       json: jest.fn(),
       status: jest.fn().mockReturnThis(),
     };
 
-    const next = jest.fn(); 
+    const next = jest.fn();
 
-    await verificationId(req, res, next)
-    await deleteUser(req, res, next); 
+    await verificationId(req, res, next);
+    await deleteUser(req, res, next);
 
     expect(res.json).toHaveBeenCalledWith({
-      message: 'User deleted',
+      message: "User deleted",
       data: expect.any(Array),
     });
 

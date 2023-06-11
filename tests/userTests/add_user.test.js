@@ -1,19 +1,17 @@
-const { sequelize, User } = require('../../models');
-const { addUser } = require('../../src/controllers/userControllers');
-const bcrypt = require('bcrypt');
-const nombre = "Eadaddsad"
-const email = "paddaso@gmail.com"
-const contras = "asdadadaddsadasdlñ"
+const { sequelize, User } = require("../../models");
+const { addUser } = require("../../src/controllers/userControllers");
+const bcrypt = require("bcrypt");
+const nombre = "Eadaddsad";
+const email = "paddaso@gmail.com";
+const contras = "asdadadaddsadasdlñ";
 
-
-
-describe('addUser', () => {
-  it('New user has been created successfully', async () => {
+describe("addUser", () => {
+  it("New user has been created successfully", async () => {
     const req = {
       body: {
         name: nombre,
         email: email,
-        password: contras
+        password: contras,
       },
     };
 
@@ -28,17 +26,17 @@ describe('addUser', () => {
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'New user has been created successfully',
+      message: "New user has been created successfully",
       data: expect.objectContaining({
-        name: nombre, 
+        name: nombre,
         email: email,
-        password: expect.anything()
+        password: expect.anything(),
       }),
     });
 
     expect(next).not.toHaveBeenCalled();
-     // Verificar que el usuario se haya guardado en la base de datos
-     const createdUser = await User.findOne({
+    // Verificar que el usuario se haya guardado en la base de datos
+    const createdUser = await User.findOne({
       where: { email: email },
     });
 
@@ -47,6 +45,6 @@ describe('addUser', () => {
     expect(createdUser).toBeTruthy();
     expect(createdUser.name).toBe(nombre);
     expect(createdUser.email).toBe(email);
-    expect(hashedPassword).toBe(true)
+    expect(hashedPassword).toBe(true);
   });
 });
