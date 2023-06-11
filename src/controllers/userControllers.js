@@ -3,7 +3,6 @@ const express = require('express');
 const { hashPass,userSchema } = require('../auth/auth');
 //const {  } = require('../auth/auth')
 
-
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})
     res.status(200).json({message:"All your users", data: allUsers});

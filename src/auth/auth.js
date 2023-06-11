@@ -3,6 +3,41 @@ const bcrypt = require('bcrypt');
 const Joi = require('joi')
 const express = require('express');
 const { sequelize, Sequelize, User} = require ('../../models')
+const jwt = require('jsonwebtoken')
+import jwt_decode from "jwt-decode";
+
+//MIDDLEWARE PARA VALIDAD EL TOKEN QUE SE ENVIEN POR RUTAS
+export const verifyToken = (req, res, next) => {
+  try {const token =authToken['auth-token']; 
+  console.log("Valor del token ->>>>>>",token)
+  if (!token) {
+    return res.status(401).json({ error: 'Acceso denegado' });
+  }
+  
+  
+    const decoded = jwt.verify(token, process.env.CLAVE_TOKEN); // Verificar y decodificar el token
+    console.log('VALOR DEL TOKEN DECODIFICADO', decoded);
+    req.user = decoded; // Asignar el contenido decodificado a req.user para acceder a él en rutas posteriores
+    next(); // Continuar al siguiente middleware o ruta
+  } catch (error) {
+    res.status(400).json({ error: 'Token no es válido' });
+  }
+};
+
+export const schemaLogin = Joi.object({
+  name: Joi.string().pattern(new RegExp('^[a-zA-Z]+$')).min(3).required()
+       .messages({
+           'string.pattern.base': 'The name cannot contain numbers or special characters'
+       }),
+ email: Joi.string().min(3).email().required()
+       .messages({
+           'string.pattern.base': 'The phone number can only be made up of numbers'
+       }),
+ password: Joi.string().min(3).max(30).required()
+ .messages({
+     'string.pattern.base': ''
+ })
+})
 
 export async function hashPass(body) {
   const saltRounds = 10;
@@ -74,3 +109,4 @@ export const verificationId = async (req, res, next) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 }
+
