@@ -3,10 +3,10 @@ GET http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 ### OBTENER UN USUARIO
-GET http://127.0.0.1:3001/user/7 HTTP/1.1
+GET http://127.0.0.1:3001/user/3 HTTP/1.1
 content-type: application/json
 
-### AGREGAR UN USUARIO
+### AGREGAR UN USUARIO ADMINISTRADOR
 POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 adminpassword: admin
@@ -14,20 +14,81 @@ adminpassword: admin
 {
     "name": "Tadeo",
     "email": "Tadeeee@gmail.com",
-    "password": "tadeo"
+    "password": "admin"
 }
 
-### EDITAR UN USUARIO
-PUT http://127.0.0.1:3001/user/1 HTTP/1.1
+### AGREGAR UN USUARIO COMUN QUE SOLO PUEDE VER 
+POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Tadeo",
-    "email": "Tadeo@gmail.com",
-    "password": "tadeo"
+    "name": "Hernestino",
+    "email": "hernes_tino@outlook.com",
+    "password": "hernestocraft777"
+}
+
+### EDITAR UN USUARIO
+PUT http://127.0.0.1:3001/user/3 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Hernestino",
+    "email": "hernes_tino@outlook.com",
+    "password": "xXhernestocraft777Xx"
 }
 
 ### BORRAR UN USUARIO
 DELETE http://127.0.0.1:3001/user/1 HTTP/1.1
 content-type: application/json
 
+
+### LOGIN COMO ADMIN
+POST http://127.0.0.1:3001/user/login HTTP/1.1
+content-type: application/json
+
+{   
+    "name": "Tadeo",
+    "email": "Tadeo@gmail.com",
+    "password": "admin"
+}
+
+### LOGIN COMO USARIO COMUN
+POST http://127.0.0.1:3001/user/login HTTP/1.1
+content-type: application/json
+
+{   
+    "name": "Hernestino",
+    "email": "hernes_tino@outlook.com",
+    "password": "xXhernestocraft777Xx"
+}
+
+
+### LOGOUT
+GET http://127.0.0.1:3001/user/logout  HTTP/1.1
+content-type: application/json
+
+
+### LOGIN COMO ADMIN
+POST http://127.0.0.1:3001/user/login HTTP/1.1
+content-type: application/json
+
+{   
+    "name": "Tadeo",
+    "email": "Tadeo@gmail.com",
+    "password": "admin"
+}
+
+### LOGIN COMO USARIO COMUN
+POST http://127.0.0.1:3001/user/login HTTP/1.1
+content-type: application/json
+
+{   
+    "name": "Hernestino",
+    "email": "hernes_tino@outlook.com",
+    "password": "xXhernestocraft777Xx"
+}
+
+
+### LOGOUT
+GET http://127.0.0.1:3001/user/logout  HTTP/1.1
+content-type: application/json

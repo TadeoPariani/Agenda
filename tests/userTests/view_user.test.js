@@ -1,11 +1,11 @@
 const { sequelize, User } = require('../../models');
-const { deleteUser } = require('../../src/controllers/userControllers');
+const { getUser } = require('../../src/controllers/userControllers');
 const { verificationId } = require ('../../src/auth/auth.js')
 
-const id = 39
+const id = 4
 
 describe('getUser', () => {
-  it('should delete one user from the database', async () => {
+  it('should retrieve one user from the database', async () => {
     const req = {
       params: {
           id:id
@@ -20,11 +20,11 @@ describe('getUser', () => {
     const next = jest.fn(); 
 
     await verificationId(req, res, next)
-    await deleteUser(req, res, next); 
+    await getUser(req, res, next); 
 
     expect(res.json).toHaveBeenCalledWith({
-      message: 'User deleted',
-      data: expect.any(Array),
+      message: 'User: ',
+      data: expect.any(Object),
     });
 
     expect(res.status).toHaveBeenCalledWith(200);

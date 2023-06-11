@@ -1,16 +1,9 @@
 const { getContactbyLastName } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
-// beforeAll(async () => {
-//   await sequelize.authenticate();
-// });
 
-// afterAll(async () => {
-//   await sequelize.close();
-// });
-
+const contactLastName= 'Meridio';
 describe('getContactByLastame', () => {
   it('should get a contact by Lastname', async () => {
-    const contactLastName= 'Julian';
     const req = { 
       body: { 
         lastname: contactLastName
@@ -24,7 +17,6 @@ describe('getContactByLastame', () => {
 
     await getContactbyLastName(req, res, next);
 
-    //expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
         message:"Search result:",
         data:expect.any(Object)

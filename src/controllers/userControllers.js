@@ -1,11 +1,6 @@
 const { sequelize, Sequelize, User} = require ('../../models')
 const express = require('express');
-const { hashPass } = require('../auth/auth');
-const { userSchema } = require('../auth/auth')
-const { generatedToken } = require('../auth/auth')
-const { verifyToken } = require('../auth/auth.js')
-const { verifyLogin } = require('../auth/auth')
-
+const { hashPass,userSchema } = require('../auth/auth');
 
 const getUsers = async (req, res, next) => {
     const allUsers = await User.findAll({})
@@ -40,13 +35,8 @@ const addUser = async (req, res, next) => {
         const hashedPassword = await hashPass(body.password);
         if (hashedPassword) {
             validatedData.password = hashedPassword
-            // await User.create(validatedData)
-<<<<<<< Updated upstream
+            await User.create(validatedData)
             res.status(201).json({message: 'New user has been created successfully', data: validatedData});
-=======
-            console.log(generatedToken)
-            res.status(201).json({message: 'New user has been created successfully', data: token});
->>>>>>> Stashed changes
         }
     }catch (err) {
         if (err.details) {

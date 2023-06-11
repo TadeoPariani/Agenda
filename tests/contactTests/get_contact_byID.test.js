@@ -1,16 +1,10 @@
 const { getContactbyID } = require('../../src/controllers/contactControllers');
 const { sequelize, Sequelize, Contact } = require('../../models');
-// beforeAll(async () => {
-//   await sequelize.authenticate();
-// });
 
-// afterAll(async () => {
-//   await sequelize.close();
-// });
 
+const contactId= 111;
 describe('getContactById', () => {
   it('should get a contact by ID', async () => {
-    const contactId= 4;
     const req = { 
       params: { 
         id: contactId
@@ -24,7 +18,6 @@ describe('getContactById', () => {
 
     await getContactbyID(req, res, next);
 
-    //expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
         message:"Here is your Contact",
         data:expect.any(Object)

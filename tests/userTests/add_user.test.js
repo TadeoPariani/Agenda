@@ -1,23 +1,15 @@
 const { sequelize, User } = require('../../models');
-const { editUser } = require('../../src/controllers/userControllers');
-const { verificationId } = require ('../../src/auth/auth.js')
+const { addUser } = require('../../src/controllers/userControllers');
 const bcrypt = require('bcrypt');
-const id = 38
-const nombre = "alejandro"
-const email = "alejandro@gmail.com"
-const contras = "alejandro123"
+const nombre = "Eadaddsad"
+const email = "paddaso@gmail.com"
+const contras = "asdadadaddsadasdlñ"
 
-//Limpiar la base de datos antes de ejecutar el testeo
-// beforeEach(async () => {
-//   await User.destroy({ truncate: true });
-// });
 
-describe('editUser', () => {
-  it('User has been edited successfully', async () => {
+
+describe('addUser', () => {
+  it('New user has been created successfully', async () => {
     const req = {
-      params: {
-        id:id
-      },
       body: {
         name: nombre,
         email: email,
@@ -32,28 +24,19 @@ describe('editUser', () => {
 
     const next = jest.fn();
 
-    await verificationId(req, res, next)
-    await editUser(req, res, next);
+    await addUser(req, res, next);
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'The user has been edited successfully',
+      message: 'New user has been created successfully',
       data: expect.objectContaining({
         name: nombre, 
         email: email,
         password: expect.anything()
       }),
-      user: expect.objectContaining({
-        id:id,
-        name:"alejandro",
-        email:"alejandro@gmail.com",
-        password: expect.anything(),
-        createdAt: expect.anything(),
-        updatedAt: expect.anything()
-      })
     });
 
-    expect(next).toHaveBeenCalled();
+    expect(next).not.toHaveBeenCalled();
      // Verificar que el usuario se haya guardado en la base de datos
      const createdUser = await User.findOne({
       where: { email: email },

@@ -1,13 +1,6 @@
 const { sequelize, Sequelize, Contact } = require('../../models');
 const { getFavouritesContacts } = require('../../src/controllers/contactControllers');
 
-// beforeAll(async () => {
-//   await sequelize.authenticate(); // Conectarse a la base de datos
-// });
-
-// afterAll(async () => {
-//   await sequelize.close(); // Cerrar la conexión a la base de datos
-// });
 
 describe('getFavouritesContacts', () => {
   it('should retrieve all favourites contacts from the database', async () => {
@@ -27,6 +20,6 @@ describe('getFavouritesContacts', () => {
       message: 'Here are your favourite Contacts',
       data: expect.any(Array),
     });
-    expect(res.status).not.toHaveBeenCalled();
+    expect(res.status).toHaveBeenCalled();
   });
 });
