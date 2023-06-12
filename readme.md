@@ -1,4 +1,8 @@
 # <div align="center">Agenda - ApiRest</div>
+### Equipo de trabajo:
+* Pariani Tadeo
+* Rosales Alexis
+ 
 ## Configuración de Docker
 1.  Crear un archivo docker-compose.yml con la siguiente configuración:
 
