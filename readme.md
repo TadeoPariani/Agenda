@@ -1,4 +1,5 @@
-# Configuración de Docker
+# <div align="center">Agenda - ApiRest</div>
+## Configuración de Docker
 1.  Crear un archivo docker-compose.yml con la siguiente configuración:
 
 ```yml
@@ -21,7 +22,7 @@ Este archivo definirá un servicio para la base de datos PostgreSQL con el usuar
 2. Para iniciar Docker con la base de datos PostgreSQL, ejecutar `docker-compose up` en la raíz del proyecto. Verificar si el contenedor está corriendo utilizando el comando `docker ps`.
 
 
-# Configuración del Proyecto
+## Configuración del Proyecto
 1. Iniciar un proyecto npm con el comando `npm init`en la raíz del projecto.
 
 2. Instalar las dependencias del proyecto utilizando el comando `npm install`:
@@ -44,9 +45,9 @@ npm install bcrypy
 npm install -D jest supertest
 npm install eslint
 
-
 ```
-Comando `npm list` para ver las dependencias instaladas.
+Comando `npm list` para ver la lista de dependencias instaladas.
+
 3. Crear el archivo `.babelrc`en la raíz del proyecto con el siguiente contenido:
 
 ```json
@@ -74,11 +75,11 @@ Comando `npm list` para ver las dependencias instaladas.
     "test": "echo \"Error: no test specified\" && exit 1"
   }
 ```
-# Generar migración con Sequelize
+## Generar migración con Sequelize
 1. Para generar una migración en Sequelize, utilizar el comando `sequelize migration:generate --name <nombre_de_la_migracion>`. Esto creará un archivo con el nombre especificado en la carpeta migrations que se utilizará para realizar cambios en la estructura de la base de datos.
 
 2. Para ejecutar las migraciones, utilizar el comando `sequelize db:migrate`. Esto aplicará los cambios especificados en las migraciones a la base de datos.
 
-# Ejecución de la aplicación
+## Ejecución de la aplicación
 1. Para ejecutar la aplicación, utilizar el comando `npm run dev`. Esto iniciará el servidor en modo desarrollo en el puerto especificado, por defecto el puerto 3000.
-  - http://localhost:3003
+  - http://localhost:3001
