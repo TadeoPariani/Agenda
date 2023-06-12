@@ -23,7 +23,7 @@ const {
 router.post('/login', async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
-    const admin = await User.findByPk(3);
+    const admin = await User.findByPk(2);
     bcrypt.compare(password, admin.password, async function (err, result) {
       if (result === true) {
         const payload = {
