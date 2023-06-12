@@ -6,7 +6,7 @@ content-type: application/json
 GET http://localhost:3001/contact/favourites HTTP/1.1 
 content-type: application/json
 
-###
+### Get one contact
 GET http://localhost:3001/contact/1 HTTP/1.1 
 content-type: application/json
 
@@ -31,9 +31,9 @@ POST http://localhost:3001/contact/ HTTP/1.1
 content-type: application/json
 
 {
-    "name":"Alfredo",
-    "lastname": "Juan",
-    "phone":"08342224458",
+    "name":"rAUL",
+    "lastname": "GUTIERREZ",
+    "phone":"154299748",
     "favourite":true
 }
 
@@ -42,7 +42,9 @@ PUT http://localhost:3001/contact/1 HTTP/1.1
 content-type: application/json
 
 {
-"name":"Ismael","lastname":"Rodriguez", "phone":"0855599924458"
+    "name":"Ismael",
+    "lastname":"Rodriguez",
+    "phone":"0855599924458"
 }
 
 ### Delete contact

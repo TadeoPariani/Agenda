@@ -1,23 +1,24 @@
-const { sequelize, User } = require("../../models");
-const { addUser } = require("../../src/controllers/userControllers");
-const bcrypt = require("bcrypt");
-const nombre = "Eadaddsad";
-const email = "paddaso@gmail.com";
-const contras = "asdadadaddsadasdlñ";
+const bcrypt = require('bcrypt');
+const { sequelize, User } = require('../../models');
+const { addUser } = require('../../src/controllers/userControllers');
 
-describe("addUser", () => {
-  it("New user has been created successfully", async () => {
+const nombre = 'Eadaddsad';
+const email = 'paddaso@gmail.com';
+const contras = 'asdadadaddsadasdlñ';
+
+describe('addUser', () => {
+  it('New user has been created successfully', async () => {
     const req = {
       body: {
         name: nombre,
         email: email,
-        password: contras,
-      },
+        password: contras
+      }
     };
 
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      json: jest.fn()
     };
 
     const next = jest.fn();
@@ -30,14 +31,14 @@ describe("addUser", () => {
       data: expect.objectContaining({
         name: nombre,
         email: email,
-        password: expect.anything(),
-      }),
+        password: expect.anything()
+      })
     });
 
     expect(next).not.toHaveBeenCalled();
     // Verificar que el usuario se haya guardado en la base de datos
     const createdUser = await User.findOne({
-      where: { email: email },
+      where: { email: email }
     });
 
     const hashedPassword = await bcrypt.compare(contras, createdUser.password);

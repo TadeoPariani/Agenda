@@ -3,7 +3,7 @@ GET http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 ### OBTENER UN USUARIO
-GET http://127.0.0.1:3001/user/3 HTTP/1.1
+GET http://127.0.0.1:3001/user/2 HTTP/1.1
 content-type: application/json
 
 ### AGREGAR UN USUARIO ADMINISTRADOR
@@ -22,9 +22,9 @@ POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Hernestino",
-    "email": "hernes_tino@outlook.com",
-    "password": "hernestocraft777"
+    "name": "pedro",
+    "email": "pedro@outlook.com",
+    "password": "pedro1234"
 }
 
 ### EDITAR UN USUARIO
@@ -32,9 +32,9 @@ PUT http://127.0.0.1:3001/user/3 HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Hernestino",
-    "email": "hernes_tino@outlook.com",
-    "password": "xXhernestocraft777Xx"
+    "name": "admin",
+    "email": "admin@outlook.com",
+    "password": "admin"
 }
 
 ### BORRAR UN USUARIO

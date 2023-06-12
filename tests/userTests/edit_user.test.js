@@ -1,30 +1,30 @@
-const { sequelize, User } = require("../../models");
-const { editUser } = require("../../src/controllers/userControllers");
-const { verificationId } = require("../../src/auth/auth.js");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
+const { sequelize, User } = require('../../models');
+const { editUser } = require('../../src/controllers/userControllers');
+const { verificationId } = require('../../src/auth/auth');
 
 // datos de prueba
 const id = 1;
-const nombre = "Anacleta";
-const email = "chancleta@gmail.com";
-const contras = "chancla123";
+const nombre = 'Anacleta';
+const email = 'chancleta@gmail.com';
+const contras = 'chancla123';
 
-describe("editUser", () => {
-  it("User has been edited successfully", async () => {
+describe('editUser', () => {
+  it('User has been edited successfully', async () => {
     const req = {
       params: {
-        id: id,
+        id: id
       },
       body: {
         name: nombre,
         email: email,
-        password: contras,
-      },
+        password: contras
+      }
     };
 
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      json: jest.fn()
     };
 
     const next = jest.fn();
@@ -45,7 +45,7 @@ describe("editUser", () => {
     expect(next).toHaveBeenCalled();
     // Verificar que el usuario se haya editado en la base de datos
     const editedUser = await User.findOne({
-      where: { email: email },
+      where: { email: email }
     });
 
     const hashedPassword = await bcrypt.compare(contras, editedUser.password);

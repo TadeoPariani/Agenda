@@ -1,10 +1,10 @@
-const { editContact } = require("../../src/controllers/contactControllers");
-const { sequelize, Sequelize, Contact } = require("../../models");
+const { editContact } = require('../../src/controllers/contactControllers');
+const { sequelize, Sequelize, Contact } = require('../../models');
 
 const contactId = 110;
-const name = "Ornelio";
-const lastname = "Prieto";
-const phone = "911894441";
+const name = 'Ornelio';
+const lastname = 'Prieto';
+const phone = '911894441';
 const favourite = true;
 
 describe("editContact", () => {
@@ -19,7 +19,7 @@ describe("editContact", () => {
     };
     const res = {
       status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
+      json: jest.fn()
     };
 
     const next = jest.fn();
@@ -29,7 +29,7 @@ describe("editContact", () => {
     expect(next).not.toHaveBeenCalled();
 
     const editedContact = await Contact.findOne({
-      where: { id: contactId },
+      where: { id: contactId }
     });
 
     expect(editedContact.name).toBe(name);
