@@ -31,9 +31,9 @@ POST http://localhost:3001/contact/ HTTP/1.1
 content-type: application/json
 
 {
-    "name":"rAUL",
-    "lastname": "GUTIERREZ",
-    "phone":"154299748",
+    "name":"Alesi",
+    "lastname": "Peralta",
+    "phone":"154299666",
     "favourite":true
 }
 

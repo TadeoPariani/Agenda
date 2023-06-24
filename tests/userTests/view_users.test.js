@@ -8,9 +8,9 @@ describe('getUsers', () => {
       json: jest.fn(),
       status: jest.fn().mockReturnThis()
     };
-    const next = jest.fn(); 
+    const next = jest.fn();
 
-    await getUsers(req, res, next); 
+    await getUsers(req, res, next);
 
     // Verifica si la respuesta JSON es la esperada
     expect(res.json).toHaveBeenCalledWith({

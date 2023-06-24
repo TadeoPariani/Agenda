@@ -4,8 +4,8 @@ const { verificationId } = require('../../src/auth/auth');
 
 const id = 8;
 
-describe("Delete User", () => {
-  it("should delete one user from the database", async () => {
+describe('Delete User', () => {
+  it('should delete one user from the database', async () => {
     const req = {
       params: {
         id: id

@@ -1,7 +1,7 @@
 const { getContactbyID } = require("../../src/controllers/contactControllers");
 const { sequelize, Sequelize, Contact } = require("../../models");
 
-const contactId = 111;
+const contactId = 1;
 describe('getContactById', () => {
   it('should get a contact by ID', async () => {
     const req = {

@@ -1,9 +1,9 @@
 const {
-  getContactbyName,
-} = require("../../src/controllers/contactControllers");
-const { sequelize, Sequelize, Contact } = require("../../models");
+  getContactbyName
+} = require('../../src/controllers/contactControllers');
+const { sequelize, Sequelize, Contact } = require('../../models');
 
-const contactName = 'Ismael';
+const contactName = 'juan';
 describe('getContactByName', () => {
   it('should get a contact by Name', async () => {
     const req = {

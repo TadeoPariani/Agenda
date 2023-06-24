@@ -22,9 +22,9 @@ POST http://127.0.0.1:3001/user HTTP/1.1
 content-type: application/json
 
 {
-    "name": "pedro",
-    "email": "pedro@outlook.com",
-    "password": "pedro1234"
+    "name": "ramiro",
+    "email": "ramiro@outlook.com",
+    "password": "ramiro1234"
 }
 
 ### EDITAR UN USUARIO

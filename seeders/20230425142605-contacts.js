@@ -1,31 +1,18 @@
-'use strict';
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    
-  await queryInterface.bulkInsert('Contacts', [
-    {
-    name: 'John Doe',
-    phone: "12345678",
-    date: "2002-08-12",
-    favourite: "true",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    name: 'Juan Perez',
-    phone: "12343214",
-    date: "2012-03-03",
-    favourite: "true",
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-], {});
-    
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert('Users', [
+      {
+        name: 'Tadeo',
+        email: 'tadeo@gmail.com',
+        password: '$2b$10$rZQWzXXo0YxuHEm9hUKbAO4JzNYxBolZcmbf3sdYDMe7q30TEdpu.',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+    ], {});
   },
 
-  async down (queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('contacts', null, {});
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete('Users', null, {});
   }
 };

@@ -34,12 +34,12 @@ describe('editUser', () => {
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: "The user has been edited successfully",
+      message: 'The user has been edited successfully',
       data: expect.objectContaining({
         name: nombre,
         email: email,
-        password: expect.anything(),
-      }),
+        password: expect.anything()
+      })
     });
 
     expect(next).toHaveBeenCalled();

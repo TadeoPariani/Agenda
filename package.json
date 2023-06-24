@@ -9,6 +9,7 @@
     "build": "babel src --out-dir dist",
     "start": "nodemon --exec npm run babel-node comp/backcontacts.js",
     "migration": "npx sequelize-cli db:migrate",
+    "test_migration": "npx sequelize-cli db:migrate --url 'postgres://postgres:postgres@localhost:5434/db_test'",
     "db_create": "npx sequelize-cli db:create",
     "migration:undo": "npx sequelize-cli db:migrate:undo",
     "seed": "npx sequelize-cli db:seed:all",

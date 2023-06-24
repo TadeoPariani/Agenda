@@ -3,7 +3,7 @@ const {
 } = require("../../src/controllers/contactControllers");
 const { sequelize, Sequelize, Contact } = require("../../models");
 
-const contactLastName = 'Meridio';
+const contactLastName = 'perez';
 describe('getContactByLastame', () => {
   it('should get a contact by Lastname', async () => {
     const req = {

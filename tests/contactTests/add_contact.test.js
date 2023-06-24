@@ -1,15 +1,15 @@
-const { sequelize, Contact } = require("../../models");
-const { addContact } = require("../../src/controllers/contactControllers");
+const { sequelize, Contact } = require('../../models');
+const { addContact } = require('../../src/controllers/contactControllers');
 
 // Limpiar la base de datos antes de ejecutar el testeo
 //  beforeEach(async () => {
 //   await Contact.destroy({ truncate: true });
 // });
 
-const name = 'Ermasdaddldo';
-const lastname = 'deLadasdadsas';
-const phone = '234873413';
-const favourite = false;
+const name = 'Ece';
+const lastname = 'olivero';
+const phone = '234873345';
+const favourite = true;
 describe('addContact', () => {
   it('should create a new contact', async () => {
     const req = {
@@ -31,7 +31,7 @@ describe('addContact', () => {
     await addContact(req, res, next);
 
     expect(res.json).toHaveBeenCalledWith({
-      message: "New contact has been created successfully",
+      message: 'New contact has been created successfully',
       data: expect.objectContaining({
         name: name,
         lastname: lastname,

@@ -1,5 +1,5 @@
-const { deleteContact } = require("../../src/controllers/contactControllers");
-const { sequelize, Sequelize, Contact } = require("../../models");
+const { deleteContact } = require('../../src/controllers/contactControllers');
+const { sequelize, Sequelize, Contact } = require('../../models');
 
 const contactId = 120;
 describe('deleteContact', () => {

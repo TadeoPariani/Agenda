@@ -7,15 +7,15 @@ const lastname = 'Prieto';
 const phone = '911894441';
 const favourite = true;
 
-describe("editContact", () => {
-  it("Edit contact by ID", async () => {
+describe('editContact', () => {
+  it('Edit contact by ID', async () => {
     const req = {
       params: { id: contactId },
       body: {
         name: name,
         lastname: lastname,
-        phone: phone,
-      },
+        phone: phone
+      }
     };
     const res = {
       status: jest.fn().mockReturnThis(),
@@ -37,8 +37,8 @@ describe("editContact", () => {
 
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
-      message: "The contact has been updated successfully",
-      data: expect.any(Object),
+      message: 'The contact has been updated successfully',
+      data: expect.any(Object)
     });
   });
 });

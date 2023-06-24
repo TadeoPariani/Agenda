@@ -2,10 +2,10 @@ const { sequelize, User } = require('../../models');
 const { getUser } = require('../../src/controllers/userControllers');
 const { verificationId } = require('../../src/auth/auth');
 
-const id = 4;
+const id = 2;
 
-describe("getUser", () => {
-  it("should retrieve one user from the database", async () => {
+describe('getUser', () => {
+  it('should retrieve one user from the database', async () => {
     const req = {
       params: {
         id: id

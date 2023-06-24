@@ -46,6 +46,18 @@
         ],
         "no-undef":[
             0
+        ],
+        "prefer-regex-literals":[
+            0
+        ],
+        "newline-per-chained-call":[
+            0
+        ],
+        "prefer-destructuring":[
+            0
+        ],
+        "import/no-extraneous-dependencies":[
+            0
         ]
     }
 }

@@ -2,9 +2,9 @@ const bcrypt = require('bcrypt');
 const { sequelize, User } = require('../../models');
 const { addUser } = require('../../src/controllers/userControllers');
 
-const nombre = 'Eadaddsad';
-const email = 'paddaso@gmail.com';
-const contras = 'asdadadaddsadasdlñ';
+const nombre = 'martin';
+const email = 'martin@gmail.com';
+const contras = 'martin1234';
 
 describe('addUser', () => {
   it('New user has been created successfully', async () => {
@@ -27,7 +27,7 @@ describe('addUser', () => {
 
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalledWith({
-      message: "New user has been created successfully",
+      message: 'New user has been created successfully',
       data: expect.objectContaining({
         name: nombre,
         email: email,

@@ -1,7 +1,6 @@
 const { sequelize, Sequelize, Contact } = require("../../models");
 const { getFavouritesContacts } = require('../../src/controllers/contactControllers');
 
-
 describe('getFavouritesContacts', () => {
   it('should retrieve all favourites contacts from the database', async () => {
     const contacts = await Contact.findAll({ where: { favourite: true } });
